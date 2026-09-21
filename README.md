@@ -1,0 +1,2 @@
+# Next-TechSol
+My Comp
