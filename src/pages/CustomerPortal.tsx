@@ -17,13 +17,13 @@ const NAV_ITEMS: NavItem[] = [
 
 function Sidebar({ active, onChange, onLogout }: { active: string; onChange: (id: string) => void; onLogout: () => void }) {
   return (
-    <aside className="w-56 flex-shrink-0 bg-[#C7D3D4] border-r border-[rgba(16,27,30,0.07)] flex flex-col">
+    <aside className="w-56 flex-shrink-0 bg-[var(--background)] border-r border-[rgba(16,27,30,0.07)] flex flex-col">
       <div className="h-14 flex items-center px-4 border-b border-[rgba(16,27,30,0.07)]">
         <div className="flex items-center gap-2">
-          <div className="size-6 rounded-md bg-[#2B6E78] flex items-center justify-center">
+          <div className="size-6 rounded-md bg-[var(--primary)] flex items-center justify-center">
             <span className="text-white font-bold text-[10px] font-mono">N</span>
           </div>
-          <span className="text-sm font-semibold text-[#101B1E]">Next TechSol</span>
+          <span className="text-sm font-semibold text-[var(--foreground)]">Next TechSol</span>
         </div>
         <div className="ml-auto">
           <Badge variant="info" size="sm">Client</Badge>
@@ -34,12 +34,12 @@ function Sidebar({ active, onChange, onLogout }: { active: string; onChange: (id
           <button
             key={item.id}
             onClick={() => onChange(item.id)}
-            className={`w-full flex items-center gap-2.5 px-4 py-2 text-sm transition-all ${active === item.id ? "text-[#101B1E] bg-[rgba(43,110,120,0.1)] border-r-2 border-[#2B6E78]" : "text-[#5E7378] hover:text-[#4A6064] hover:bg-[rgba(16,27,30,0.02)]"}`}
+            className={`w-full flex items-center gap-2.5 px-4 py-2 text-sm transition-all ${active === item.id ? "text-[var(--foreground)] bg-[color-mix(in_srgb,var(--primary)_10%,transparent)] border-r-2 border-[var(--primary)]" : "text-[#5E7378] hover:text-[#4A6064] hover:bg-[rgba(16,27,30,0.02)]"}`}
           >
             <span className="text-base w-5 text-center">{item.icon}</span>
             <span className="flex-1 text-left">{item.label}</span>
             {item.badge && (
-              <span className="text-[10px] font-mono bg-[rgba(43,110,120,0.2)] text-[#2B6E78] px-1.5 py-0.5 rounded-full">{item.badge}</span>
+              <span className="text-[10px] font-mono bg-[color-mix(in_srgb,var(--primary)_20%,transparent)] text-[var(--primary)] px-1.5 py-0.5 rounded-full">{item.badge}</span>
             )}
           </button>
         ))}
@@ -48,7 +48,7 @@ function Sidebar({ active, onChange, onLogout }: { active: string; onChange: (id
         <div className="flex items-center gap-2.5 mb-3">
           <Avatar name="James Mitchell" size="sm" />
           <div>
-            <div className="text-xs font-medium text-[#101B1E]">James Mitchell</div>
+            <div className="text-xs font-medium text-[var(--foreground)]">James Mitchell</div>
             <div className="text-[10px] text-[#7C9096]">Atlas Travel Group</div>
           </div>
         </div>
@@ -63,14 +63,14 @@ function TopBar({ title, subtitle, onSearch }: { title: string; subtitle?: strin
   return (
     <div className="h-14 flex items-center justify-between px-6 border-b border-[rgba(16,27,30,0.07)] flex-shrink-0">
       <div>
-        <div className="text-sm font-semibold text-[#101B1E]">{title}</div>
+        <div className="text-sm font-semibold text-[var(--foreground)]">{title}</div>
         {subtitle && <div className="text-xs text-[#7C9096]">{subtitle}</div>}
       </div>
       <div className="flex items-center gap-3">
         {onSearch && <SearchBar value={q} onChange={v => { setQ(v); onSearch(v); }} placeholder="Search..." />}
-        <button className="relative w-8 h-8 flex items-center justify-center rounded-lg text-[#5E7378] hover:text-[#101B1E] hover:bg-[rgba(16,27,30,0.05)] transition-all">
+        <button className="relative w-8 h-8 flex items-center justify-center rounded-lg text-[#5E7378] hover:text-[var(--foreground)] hover:bg-[rgba(16,27,30,0.05)] transition-all">
           <span>◆</span>
-          <span className="absolute top-1.5 right-1.5 size-1.5 rounded-full bg-[#2B6E78]" />
+          <span className="absolute top-1.5 right-1.5 size-1.5 rounded-full bg-[var(--primary)]" />
         </button>
         <Avatar name="James Mitchell" size="sm" />
       </div>
@@ -84,7 +84,7 @@ function Dashboard() {
     <div className="flex-1 overflow-y-auto p-6 animate-fade-in">
       <div className="max-w-6xl">
         <div className="mb-6">
-          <h2 className="text-xl font-semibold text-[#101B1E]">Good morning, James.</h2>
+          <h2 className="text-xl font-semibold text-[var(--foreground)]">Good morning, James.</h2>
           <p className="text-sm text-[#7C9096] mt-0.5">Here's what needs your attention today.</p>
         </div>
         {/* KPIs */}
@@ -100,7 +100,7 @@ function Dashboard() {
           <div className="lg:col-span-2">
             <Card>
               <div className="flex items-center justify-between mb-4">
-                <div className="text-sm font-semibold text-[#101B1E]">Active Projects</div>
+                <div className="text-sm font-semibold text-[var(--foreground)]">Active Projects</div>
                 <Button variant="ghost" size="sm">View all →</Button>
               </div>
               <div className="space-y-4">
@@ -111,10 +111,10 @@ function Dashboard() {
                 ].map(p => (
                   <div key={p.name} className="p-4 bg-[#DCE7E7] rounded-xl border border-[rgba(16,27,30,0.05)]">
                     <div className="flex items-center justify-between mb-2">
-                      <div className="text-sm font-medium text-[#101B1E]">{p.name}</div>
+                      <div className="text-sm font-medium text-[var(--foreground)]">{p.name}</div>
                       <Badge variant={p.status === "on-track" ? "success" : "warning"} size="sm" dot>{p.phase}</Badge>
                     </div>
-                    <ProgressBar value={p.progress} showPercent color={p.progress > 80 ? "#16A34A" : "#2B6E78"} />
+                    <ProgressBar value={p.progress} showPercent color={p.progress > 80 ? "#16A34A" : "var(--primary)"} />
                     <div className="text-[11px] text-[#7C9096] mt-2">Due {p.due}</div>
                   </div>
                 ))}
@@ -125,7 +125,7 @@ function Dashboard() {
           {/* Right column */}
           <div className="space-y-5">
             <Card>
-              <div className="text-sm font-semibold text-[#101B1E] mb-3">Pending Approvals</div>
+              <div className="text-sm font-semibold text-[var(--foreground)] mb-3">Pending Approvals</div>
               {[
                 { title: "Homepage Design v3", type: "Design Review", urgent: true },
                 { title: "Payment Gateway Spec", type: "Technical Review", urgent: false },
@@ -142,7 +142,7 @@ function Dashboard() {
             </Card>
 
             <Card>
-              <div className="text-sm font-semibold text-[#101B1E] mb-3">Recent Messages</div>
+              <div className="text-sm font-semibold text-[var(--foreground)] mb-3">Recent Messages</div>
               {[
                 { from: "Sarah Chen", msg: "Design review scheduled for Friday 2pm", time: "2h ago" },
                 { from: "Project Bot", msg: "Sprint 7 completed — 23/24 tasks done", time: "5h ago" },
@@ -161,7 +161,7 @@ function Dashboard() {
             </Card>
 
             <Card>
-              <div className="text-sm font-semibold text-[#101B1E] mb-3">Upcoming Milestones</div>
+              <div className="text-sm font-semibold text-[var(--foreground)] mb-3">Upcoming Milestones</div>
               {[
                 { title: "API v2 Go-Live", date: "Feb 28", status: "danger" as const },
                 { title: "Design Handoff", date: "Mar 5", status: "warning" as const },
@@ -190,7 +190,7 @@ function Projects() {
     <div className="flex-1 overflow-y-auto p-6 animate-fade-in">
       <div className="max-w-6xl">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-[#101B1E]">Projects</h2>
+          <h2 className="text-xl font-semibold text-[var(--foreground)]">Projects</h2>
           <Tabs tabs={[{id:"active",label:"Active",count:3},{id:"completed",label:"Completed",count:8},{id:"all",label:"All"}]} active={activeTab} onChange={setActiveTab} />
         </div>
         <div className="grid lg:grid-cols-2 gap-5">
@@ -199,10 +199,10 @@ function Projects() {
             { name: "Mobile App v2.0", phase: "Design", progress: 30, health: "On Track", client: "Atlas Travel Group", team: ["Priya Nair", "Sarah Chen"], start: "Jan 2026", end: "Apr 2026", budget: "$38,000", spent: 28 },
             { name: "API Integration Suite", phase: "Testing", progress: 85, health: "Needs Review", client: "Atlas Travel Group", team: ["Marcus Webb", "Tom Okonkwo"], start: "Dec 2025", end: "Feb 2026", budget: "$22,000", spent: 82 },
           ].map(p => (
-            <div key={p.name} className="bg-[#FFFFFF] border border-[rgba(16,27,30,0.07)] rounded-xl p-5 hover:border-[rgba(43,110,120,0.25)] transition-all">
+            <div key={p.name} className="bg-[#FFFFFF] border border-[rgba(16,27,30,0.07)] rounded-xl p-5 hover:border-[color-mix(in_srgb,var(--primary)_25%,transparent)] transition-all">
               <div className="flex items-start justify-between mb-3">
                 <div>
-                  <div className="text-sm font-semibold text-[#101B1E] mb-1">{p.name}</div>
+                  <div className="text-sm font-semibold text-[var(--foreground)] mb-1">{p.name}</div>
                   <div className="text-[11px] text-[#7C9096]">{p.client}</div>
                 </div>
                 <Badge variant={p.health === "On Track" ? "success" : "warning"} dot>{p.health}</Badge>
@@ -212,15 +212,15 @@ function Projects() {
               </div>
               <div className="grid grid-cols-3 gap-3 mb-4 text-center">
                 <div className="bg-[#DCE7E7] rounded-lg p-2">
-                  <div className="text-xs font-mono text-[#101B1E]">{p.phase}</div>
+                  <div className="text-xs font-mono text-[var(--foreground)]">{p.phase}</div>
                   <div className="text-[10px] text-[#7C9096]">Current Phase</div>
                 </div>
                 <div className="bg-[#DCE7E7] rounded-lg p-2">
-                  <div className="text-xs font-mono text-[#101B1E]">{p.budget}</div>
+                  <div className="text-xs font-mono text-[var(--foreground)]">{p.budget}</div>
                   <div className="text-[10px] text-[#7C9096]">Budget</div>
                 </div>
                 <div className="bg-[#DCE7E7] rounded-lg p-2">
-                  <div className="text-xs font-mono text-[#101B1E]">{p.end}</div>
+                  <div className="text-xs font-mono text-[var(--foreground)]">{p.end}</div>
                   <div className="text-[10px] text-[#7C9096]">Due Date</div>
                 </div>
               </div>
@@ -256,12 +256,12 @@ function Tasks() {
   return (
     <div className="flex-1 overflow-y-auto p-6 animate-fade-in">
       <div className="max-w-6xl">
-        <h2 className="text-xl font-semibold text-[#101B1E] mb-6">Tasks</h2>
+        <h2 className="text-xl font-semibold text-[var(--foreground)] mb-6">Tasks</h2>
         <Card className="!p-0 overflow-hidden">
           <Table
             columns={[
               { key: "id", label: "ID", width: "80px", render: r => <span className="font-mono text-[10px] text-[#7C9096]">{String(r.id)}</span> },
-              { key: "title", label: "Task", render: r => <span className="text-[#101B1E] font-medium">{String(r.title)}</span> },
+              { key: "title", label: "Task", render: r => <span className="text-[var(--foreground)] font-medium">{String(r.title)}</span> },
               { key: "project", label: "Project", render: r => <span className="text-xs text-[#5E7378]">{String(r.project)}</span> },
               { key: "status", label: "Status", render: r => <Badge variant={statusColor[String(r.status)] || "neutral"} dot>{String(r.status)}</Badge> },
               { key: "priority", label: "Priority", render: r => <Badge variant={priorityColor[String(r.priority)] || "neutral"}>{String(r.priority)}</Badge> },
@@ -290,7 +290,7 @@ function Documents() {
     <div className="flex-1 overflow-y-auto p-6 animate-fade-in">
       <div className="max-w-6xl">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-[#101B1E]">Documents</h2>
+          <h2 className="text-xl font-semibold text-[var(--foreground)]">Documents</h2>
           <div className="flex gap-3">
             <SearchBar value={search} onChange={setSearch} placeholder="Search documents..." />
             <Button size="sm">Upload</Button>
@@ -298,7 +298,7 @@ function Documents() {
         </div>
         <div className="flex gap-2 mb-5">
           {["All", "Contracts", "Designs", "Requirements", "Invoices", "Deliverables"].map(cat => (
-            <button key={cat} className="text-xs px-3 py-1.5 rounded-lg border border-[rgba(16,27,30,0.07)] text-[#5E7378] hover:text-[#101B1E] hover:border-[rgba(43,110,120,0.3)] transition-all">
+            <button key={cat} className="text-xs px-3 py-1.5 rounded-lg border border-[rgba(16,27,30,0.07)] text-[#5E7378] hover:text-[var(--foreground)] hover:border-[color-mix(in_srgb,var(--primary)_30%,transparent)] transition-all">
               {cat}
             </button>
           ))}
@@ -306,7 +306,7 @@ function Documents() {
         <Card className="!p-0 overflow-hidden">
           <Table
             columns={[
-              { key: "name", label: "File", render: r => <div className="flex items-center gap-2"><span className="text-base">📄</span><span className="text-[#101B1E] text-xs font-medium">{String(r.name)}</span></div> },
+              { key: "name", label: "File", render: r => <div className="flex items-center gap-2"><span className="text-base">📄</span><span className="text-[var(--foreground)] text-xs font-medium">{String(r.name)}</span></div> },
               { key: "category", label: "Category", render: r => <Badge variant="neutral" size="sm">{String(r.category)}</Badge> },
               { key: "size", label: "Size", render: r => <span className="font-mono text-[11px] text-[#7C9096]">{String(r.size)}</span> },
               { key: "date", label: "Date", render: r => <span className="text-xs text-[#5E7378]">{String(r.date)}</span> },
@@ -333,7 +333,7 @@ function Invoices() {
     <div className="flex-1 overflow-y-auto p-6 animate-fade-in">
       <div className="max-w-4xl">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-[#101B1E]">Invoices</h2>
+          <h2 className="text-xl font-semibold text-[var(--foreground)]">Invoices</h2>
         </div>
         <div className="grid grid-cols-3 gap-4 mb-6">
           <KPICard label="Outstanding" value="$18,000" icon="◈" />
@@ -343,9 +343,9 @@ function Invoices() {
         <Card className="!p-0 overflow-hidden">
           <Table
             columns={[
-              { key: "id", label: "Invoice", render: r => <span className="font-mono text-[11px] text-[#2B6E78]">{String(r.id)}</span> },
+              { key: "id", label: "Invoice", render: r => <span className="font-mono text-[11px] text-[var(--primary)]">{String(r.id)}</span> },
               { key: "desc", label: "Description", render: r => <span className="text-xs text-[#33474B]">{String(r.desc)}</span> },
-              { key: "amount", label: "Amount", render: r => <span className="font-semibold text-sm text-[#101B1E]">{String(r.amount)}</span> },
+              { key: "amount", label: "Amount", render: r => <span className="font-semibold text-sm text-[var(--foreground)]">{String(r.amount)}</span> },
               { key: "date", label: "Issued", render: r => <span className="text-xs text-[#5E7378]">{String(r.date)}</span> },
               { key: "due", label: "Due", render: r => <span className="text-xs text-[#5E7378]">{String(r.due)}</span> },
               { key: "status", label: "Status", render: r => <Badge variant={String(r.status) === "Paid" ? "success" : "warning"} dot>{String(r.status)}</Badge> },
@@ -372,17 +372,17 @@ function Notifications() {
     <div className="flex-1 overflow-y-auto p-6 animate-fade-in">
       <div className="max-w-2xl">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-[#101B1E]">Notifications</h2>
+          <h2 className="text-xl font-semibold text-[var(--foreground)]">Notifications</h2>
           <Button variant="ghost" size="sm">Mark all as read</Button>
         </div>
         <div className="space-y-2">
           {notifs.map((n, i) => (
-            <div key={i} className={`flex gap-4 p-4 rounded-xl border transition-all ${n.unread ? "bg-[rgba(43,110,120,0.05)] border-[rgba(43,110,120,0.15)]" : "bg-[#FFFFFF] border-[rgba(16,27,30,0.06)]"}`}>
-              <div className={`text-lg ${n.unread ? "text-[#2B6E78]" : "text-[#7C9096]"}`}>{n.icon}</div>
+            <div key={i} className={`flex gap-4 p-4 rounded-xl border transition-all ${n.unread ? "bg-[color-mix(in_srgb,var(--primary)_5%,transparent)] border-[color-mix(in_srgb,var(--primary)_15%,transparent)]" : "bg-[#FFFFFF] border-[rgba(16,27,30,0.06)]"}`}>
+              <div className={`text-lg ${n.unread ? "text-[var(--primary)]" : "text-[#7C9096]"}`}>{n.icon}</div>
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-0.5">
-                  <span className="text-sm font-medium text-[#101B1E]">{n.title}</span>
-                  {n.unread && <span className="size-1.5 rounded-full bg-[#2B6E78]" />}
+                  <span className="text-sm font-medium text-[var(--foreground)]">{n.title}</span>
+                  {n.unread && <span className="size-1.5 rounded-full bg-[var(--primary)]" />}
                 </div>
                 <div className="text-xs text-[#5E7378]">{n.desc}</div>
               </div>
@@ -418,7 +418,7 @@ export default function CustomerPortal({ onLogout }: { onLogout: () => void }) {
     }
   };
   return (
-    <div className="h-screen flex bg-[#C7D3D4] overflow-hidden">
+    <div className="h-screen flex bg-[var(--background)] overflow-hidden">
       <Sidebar active={activeView} onChange={setActiveView} onLogout={onLogout} />
       <div className="flex-1 flex flex-col min-w-0">
         <TopBar title={titles[activeView]} subtitle="Atlas Travel Group" />

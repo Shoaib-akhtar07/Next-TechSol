@@ -5,6 +5,7 @@ import EmployeePortal from "./pages/EmployeePortal";
 import AdminPortal from "./pages/AdminPortal";
 import ProjectInquiry from "./pages/ProjectInquiry";
 import { CommandPalette, Toast } from "./components/ui";
+import { applyTheme, loadTheme } from "./theme";
 
 type View = "public" | "inquiry" | "customer" | "employee" | "admin";
 
@@ -17,7 +18,7 @@ function LoginScreen({ role, onLogin, onBack }: { role: "customer" | "employee" 
   const [loading, setLoading] = useState(false);
 
   const config = {
-    customer: { label: "Client Portal", badge: "Client", accent: "#2B6E78", prefill: "james@atlasgroup.com" },
+    customer: { label: "Client Portal", badge: "Client", accent: "var(--primary)", prefill: "james@atlasgroup.com" },
     employee: { label: "Team Workspace", badge: "Team", accent: "#16A34A", prefill: "sarah@arcanesystems.io" },
     admin: { label: "Admin Panel", badge: "Admin", accent: "#DC2626", prefill: "alex@arcanesystems.io" },
   }[role];
@@ -28,24 +29,24 @@ function LoginScreen({ role, onLogin, onBack }: { role: "customer" | "employee" 
   };
 
   return (
-    <div className="min-h-screen bg-[#C7D3D4] flex items-center justify-center p-6 grid-pattern">
-      <div className="absolute inset-0 bg-gradient-radial" style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(43,110,120,0.06) 0%, transparent 60%)" }} />
+    <div className="min-h-screen bg-[var(--background)] flex items-center justify-center p-6 grid-pattern">
+      <div className="absolute inset-0 bg-gradient-radial" style={{ background: "radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--primary) 6%, transparent) 0%, transparent 60%)" }} />
       <div className="relative w-full max-w-sm animate-fade-in">
         <button onClick={onBack} className="flex items-center gap-1.5 text-xs text-[#7C9096] hover:text-[#4A6064] mb-8 transition-colors">
           ← Back to website
         </button>
         <div className="bg-[#FFFFFF] border border-[rgba(16,27,30,0.08)] rounded-2xl p-8">
           <div className="flex items-center gap-2 mb-8">
-            <div className="size-8 rounded-lg bg-[#2B6E78] flex items-center justify-center">
+            <div className="size-8 rounded-lg bg-[var(--primary)] flex items-center justify-center">
               <span className="text-white font-bold text-xs font-mono">N</span>
             </div>
             <div>
-              <div className="text-sm font-semibold text-[#101B1E]">Next TechSol</div>
+              <div className="text-sm font-semibold text-[var(--foreground)]">Next TechSol</div>
               <div className="text-[10px] text-[#7C9096]">{config.label}</div>
             </div>
           </div>
 
-          <h1 className="text-xl font-semibold text-[#101B1E] mb-1">Sign in</h1>
+          <h1 className="text-xl font-semibold text-[var(--foreground)] mb-1">Sign in</h1>
           <p className="text-xs text-[#7C9096] mb-6">Access your {config.label.toLowerCase()}</p>
 
           <div className="space-y-4 mb-6">
@@ -55,7 +56,7 @@ function LoginScreen({ role, onLogin, onBack }: { role: "customer" | "employee" 
                 type="email"
                 value={email || config.prefill}
                 onChange={e => setEmail(e.target.value)}
-                className="w-full h-10 bg-[#DCE7E7] border border-[rgba(16,27,30,0.08)] rounded-lg px-3 text-sm text-[#101B1E] focus:border-[#2B6E78] focus:outline-none focus:ring-1 focus:ring-[rgba(43,110,120,0.3)] transition-all"
+                className="w-full h-10 bg-[#DCE7E7] border border-[rgba(16,27,30,0.08)] rounded-lg px-3 text-sm text-[var(--foreground)] focus:border-[var(--primary)] focus:outline-none focus:ring-1 focus:ring-[color-mix(in_srgb,var(--primary)_30%,transparent)] transition-all"
               />
             </div>
             <div>
@@ -64,7 +65,7 @@ function LoginScreen({ role, onLogin, onBack }: { role: "customer" | "employee" 
                 type="password"
                 value={password || "••••••••••••"}
                 onChange={e => setPassword(e.target.value)}
-                className="w-full h-10 bg-[#DCE7E7] border border-[rgba(16,27,30,0.08)] rounded-lg px-3 text-sm text-[#101B1E] focus:border-[#2B6E78] focus:outline-none focus:ring-1 focus:ring-[rgba(43,110,120,0.3)] transition-all"
+                className="w-full h-10 bg-[#DCE7E7] border border-[rgba(16,27,30,0.08)] rounded-lg px-3 text-sm text-[var(--foreground)] focus:border-[var(--primary)] focus:outline-none focus:ring-1 focus:ring-[color-mix(in_srgb,var(--primary)_30%,transparent)] transition-all"
               />
             </div>
           </div>
@@ -72,7 +73,7 @@ function LoginScreen({ role, onLogin, onBack }: { role: "customer" | "employee" 
           <button
             onClick={handleLogin}
             disabled={loading}
-            className="w-full h-10 bg-[#2B6E78] text-white text-sm font-medium rounded-lg hover:bg-[#235761] transition-colors flex items-center justify-center gap-2 disabled:opacity-70"
+            className="w-full h-10 bg-[var(--primary)] text-white text-sm font-medium rounded-lg hover:bg-[color-mix(in_srgb,var(--primary)_82%,black)] transition-colors flex items-center justify-center gap-2 disabled:opacity-70"
           >
             {loading ? (
               <>
@@ -97,17 +98,17 @@ function LoginScreen({ role, onLogin, onBack }: { role: "customer" | "employee" 
 // ── Portal Selector ────────────────────────────────────────────────────────
 function PortalSelector({ onSelect, onBack }: { onSelect: (role: "customer" | "employee" | "admin") => void; onBack: () => void }) {
   return (
-    <div className="min-h-screen bg-[#C7D3D4] flex items-center justify-center p-6 grid-pattern">
-      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(43,110,120,0.05) 0%, transparent 60%)" }} />
+    <div className="min-h-screen bg-[var(--background)] flex items-center justify-center p-6 grid-pattern">
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--primary) 5%, transparent) 0%, transparent 60%)" }} />
       <div className="relative w-full max-w-lg animate-fade-in">
         <button onClick={onBack} className="flex items-center gap-1.5 text-xs text-[#7C9096] hover:text-[#4A6064] mb-8 transition-colors">
           ← Back to website
         </button>
         <div className="text-center mb-8">
-          <div className="size-12 rounded-xl bg-[#2B6E78] flex items-center justify-center mx-auto mb-4">
+          <div className="size-12 rounded-xl bg-[var(--primary)] flex items-center justify-center mx-auto mb-4">
             <span className="text-white font-bold font-mono text-lg">A</span>
           </div>
-          <h1 className="text-2xl font-semibold text-[#101B1E] mb-2">Select Your Portal</h1>
+          <h1 className="text-2xl font-semibold text-[var(--foreground)] mb-2">Select Your Portal</h1>
           <p className="text-sm text-[#7C9096]">Choose the experience you want to explore</p>
         </div>
         <div className="space-y-3">
@@ -119,14 +120,14 @@ function PortalSelector({ onSelect, onBack }: { onSelect: (role: "customer" | "e
             <button
               key={p.role}
               onClick={() => onSelect(p.role)}
-              className="w-full flex items-center gap-4 p-5 bg-[#FFFFFF] border border-[rgba(16,27,30,0.07)] rounded-xl hover:border-[rgba(43,110,120,0.35)] hover:bg-[rgba(43,110,120,0.03)] transition-all text-left group"
+              className="w-full flex items-center gap-4 p-5 bg-[#FFFFFF] border border-[rgba(16,27,30,0.07)] rounded-xl hover:border-[color-mix(in_srgb,var(--primary)_35%,transparent)] hover:bg-[color-mix(in_srgb,var(--primary)_3%,transparent)] transition-all text-left group"
             >
-              <div className="text-2xl text-[#7C9096] group-hover:text-[#2B6E78] transition-colors">{p.icon}</div>
+              <div className="text-2xl text-[#7C9096] group-hover:text-[var(--primary)] transition-colors">{p.icon}</div>
               <div className="flex-1">
-                <div className="text-sm font-semibold text-[#101B1E] mb-0.5">{p.label}</div>
+                <div className="text-sm font-semibold text-[var(--foreground)] mb-0.5">{p.label}</div>
                 <div className="text-xs text-[#7C9096]">{p.desc}</div>
               </div>
-              <span className="text-[#5E7378] group-hover:text-[#2B6E78] transition-colors">→</span>
+              <span className="text-[#5E7378] group-hover:text-[var(--primary)] transition-colors">→</span>
             </button>
           ))}
         </div>
@@ -142,6 +143,10 @@ export default function App() {
   const [showPortalSelector, setShowPortalSelector] = useState(false);
   const [cmdOpen, setCmdOpen] = useState(false);
   const [toast, setToast] = useState<ToastData | null>(null);
+
+  useEffect(() => {
+    applyTheme(loadTheme());
+  }, []);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {

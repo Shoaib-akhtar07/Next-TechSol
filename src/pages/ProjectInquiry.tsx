@@ -29,10 +29,10 @@ function StepIndicator({ current, total }: { current: number; total: number }) {
     <div className="flex items-center gap-2">
       {Array.from({ length: total }, (_, i) => i + 1).map(step => (
         <div key={step} className="flex items-center gap-2">
-          <div className={`size-7 rounded-full flex items-center justify-center text-[11px] font-mono font-semibold transition-all ${step < current ? "bg-[#2B6E78] text-white" : step === current ? "bg-[#2B6E78] text-white ring-4 ring-[rgba(43,110,120,0.2)]" : "bg-[rgba(16,27,30,0.05)] text-[#7C9096] border border-[rgba(16,27,30,0.08)]"}`}>
+          <div className={`size-7 rounded-full flex items-center justify-center text-[11px] font-mono font-semibold transition-all ${step < current ? "bg-[var(--primary)] text-white" : step === current ? "bg-[var(--primary)] text-white ring-4 ring-[color-mix(in_srgb,var(--primary)_20%,transparent)]" : "bg-[rgba(16,27,30,0.05)] text-[#7C9096] border border-[rgba(16,27,30,0.08)]"}`}>
             {step < current ? "✓" : step}
           </div>
-          {step < total && <div className={`w-8 h-px transition-colors ${step < current ? "bg-[#2B6E78]" : "bg-[rgba(16,27,30,0.08)]"}`} />}
+          {step < total && <div className={`w-8 h-px transition-colors ${step < current ? "bg-[var(--primary)]" : "bg-[rgba(16,27,30,0.08)]"}`} />}
         </div>
       ))}
     </div>
@@ -57,17 +57,17 @@ function Step1({ data, onChange }: { data: string[]; onChange: (types: string[])
   };
   return (
     <div>
-      <div className="text-lg font-semibold text-[#101B1E] mb-1">What are you building?</div>
+      <div className="text-lg font-semibold text-[var(--foreground)] mb-1">What are you building?</div>
       <div className="text-sm text-[#5E7378] mb-6">Select all that apply. You can choose more than one.</div>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {types.map(t => (
           <button
             key={t.id}
             onClick={() => toggle(t.id)}
-            className={`p-4 rounded-xl border text-left transition-all ${data.includes(t.id) ? "bg-[rgba(43,110,120,0.1)] border-[#2B6E78] shadow-[0_0_0_1px_rgba(43,110,120,0.4)]" : "bg-[#FFFFFF] border-[rgba(16,27,30,0.07)] hover:border-[rgba(43,110,120,0.25)] hover:bg-[rgba(43,110,120,0.03)]"}`}
+            className={`p-4 rounded-xl border text-left transition-all ${data.includes(t.id) ? "bg-[color-mix(in_srgb,var(--primary)_10%,transparent)] border-[var(--primary)] shadow-[0_0_0_1px_color-mix(in_srgb,var(--primary)_40%,transparent)]" : "bg-[#FFFFFF] border-[rgba(16,27,30,0.07)] hover:border-[color-mix(in_srgb,var(--primary)_25%,transparent)] hover:bg-[color-mix(in_srgb,var(--primary)_3%,transparent)]"}`}
           >
-            <div className={`text-xl mb-2 ${data.includes(t.id) ? "text-[#2B6E78]" : "text-[#7C9096]"}`}>{t.icon}</div>
-            <div className={`text-xs font-medium ${data.includes(t.id) ? "text-[#101B1E]" : "text-[#4A6064]"}`}>{t.label}</div>
+            <div className={`text-xl mb-2 ${data.includes(t.id) ? "text-[var(--primary)]" : "text-[#7C9096]"}`}>{t.icon}</div>
+            <div className={`text-xs font-medium ${data.includes(t.id) ? "text-[var(--foreground)]" : "text-[#4A6064]"}`}>{t.label}</div>
           </button>
         ))}
       </div>
@@ -78,7 +78,7 @@ function Step1({ data, onChange }: { data: string[]; onChange: (types: string[])
 function Step2({ data, onChange }: { data: Partial<FormData>; onChange: (d: Partial<FormData>) => void }) {
   return (
     <div>
-      <div className="text-lg font-semibold text-[#101B1E] mb-1">Tell us about your business</div>
+      <div className="text-lg font-semibold text-[var(--foreground)] mb-1">Tell us about your business</div>
       <div className="text-sm text-[#5E7378] mb-6">This helps us match you with the right engineering team.</div>
       <div className="grid sm:grid-cols-2 gap-4">
         <Input label="Company Name" placeholder="Atlas Travel Group" value={data.company || ""} onChange={e => onChange({ ...data, company: e.target.value })} />
@@ -112,7 +112,7 @@ function Step2({ data, onChange }: { data: Partial<FormData>; onChange: (d: Part
 function Step3({ data, onChange }: { data: Partial<FormData>; onChange: (d: Partial<FormData>) => void }) {
   return (
     <div>
-      <div className="text-lg font-semibold text-[#101B1E] mb-1">Project Requirements</div>
+      <div className="text-lg font-semibold text-[var(--foreground)] mb-1">Project Requirements</div>
       <div className="text-sm text-[#5E7378] mb-6">Describe your project in as much detail as you can. Include current challenges, desired outcomes, and any technical requirements.</div>
       <Textarea
         label="Project Description"
@@ -121,12 +121,12 @@ function Step3({ data, onChange }: { data: Partial<FormData>; onChange: (d: Part
         onChange={e => onChange({ ...data, description: e.target.value })}
         rows={10}
       />
-      <div className="mt-4 p-4 bg-[rgba(43,110,120,0.05)] border border-[rgba(43,110,120,0.15)] rounded-xl">
-        <div className="text-xs font-semibold text-[#2B6E78] mb-2">💡 Tips for a better response</div>
+      <div className="mt-4 p-4 bg-[color-mix(in_srgb,var(--primary)_5%,transparent)] border border-[color-mix(in_srgb,var(--primary)_15%,transparent)] rounded-xl">
+        <div className="text-xs font-semibold text-[var(--primary)] mb-2">💡 Tips for a better response</div>
         <div className="grid sm:grid-cols-2 gap-1.5">
           {["Describe the business problem you're solving", "Mention any existing systems to integrate with", "Share your technical preferences if any", "Describe your target users"].map(tip => (
             <div key={tip} className="text-[11px] text-[#5E7378] flex items-start gap-1.5">
-              <span className="text-[#2B6E78]">→</span> {tip}
+              <span className="text-[var(--primary)]">→</span> {tip}
             </div>
           ))}
         </div>
@@ -146,16 +146,16 @@ function Step4({ data, onChange }: { data: Partial<FormData>; onChange: (d: Part
   ];
   return (
     <div>
-      <div className="text-lg font-semibold text-[#101B1E] mb-1">Project Budget</div>
+      <div className="text-lg font-semibold text-[var(--foreground)] mb-1">Project Budget</div>
       <div className="text-sm text-[#5E7378] mb-6">Select the range that best fits your budget. This helps us scope the project correctly.</div>
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
         {ranges.map(r => (
           <button
             key={r.id}
             onClick={() => onChange({ ...data, budget: r.id })}
-            className={`p-4 rounded-xl border text-left transition-all ${data.budget === r.id ? "bg-[rgba(43,110,120,0.1)] border-[#2B6E78]" : "bg-[#FFFFFF] border-[rgba(16,27,30,0.07)] hover:border-[rgba(43,110,120,0.25)]"}`}
+            className={`p-4 rounded-xl border text-left transition-all ${data.budget === r.id ? "bg-[color-mix(in_srgb,var(--primary)_10%,transparent)] border-[var(--primary)]" : "bg-[#FFFFFF] border-[rgba(16,27,30,0.07)] hover:border-[color-mix(in_srgb,var(--primary)_25%,transparent)]"}`}
           >
-            <div className={`text-sm font-semibold mb-1 ${data.budget === r.id ? "text-[#101B1E]" : "text-[#33474B]"}`}>{r.label}</div>
+            <div className={`text-sm font-semibold mb-1 ${data.budget === r.id ? "text-[var(--foreground)]" : "text-[#33474B]"}`}>{r.label}</div>
             <div className="text-[11px] text-[#7C9096]">{r.sub}</div>
           </button>
         ))}
@@ -175,16 +175,16 @@ function Step5({ data, onChange }: { data: Partial<FormData>; onChange: (d: Part
   ];
   return (
     <div>
-      <div className="text-lg font-semibold text-[#101B1E] mb-1">Desired Timeline</div>
+      <div className="text-lg font-semibold text-[var(--foreground)] mb-1">Desired Timeline</div>
       <div className="text-sm text-[#5E7378] mb-6">When would you like to start, and what's your expected delivery window?</div>
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
         {options.map(o => (
           <button
             key={o.id}
             onClick={() => onChange({ ...data, timeline: o.id })}
-            className={`p-4 rounded-xl border text-left transition-all ${data.timeline === o.id ? "bg-[rgba(43,110,120,0.1)] border-[#2B6E78]" : "bg-[#FFFFFF] border-[rgba(16,27,30,0.07)] hover:border-[rgba(43,110,120,0.25)]"}`}
+            className={`p-4 rounded-xl border text-left transition-all ${data.timeline === o.id ? "bg-[color-mix(in_srgb,var(--primary)_10%,transparent)] border-[var(--primary)]" : "bg-[#FFFFFF] border-[rgba(16,27,30,0.07)] hover:border-[color-mix(in_srgb,var(--primary)_25%,transparent)]"}`}
           >
-            <div className={`text-sm font-semibold mb-1 ${data.timeline === o.id ? "text-[#101B1E]" : "text-[#33474B]"}`}>{o.label}</div>
+            <div className={`text-sm font-semibold mb-1 ${data.timeline === o.id ? "text-[var(--foreground)]" : "text-[#33474B]"}`}>{o.label}</div>
             <div className="text-[11px] text-[#7C9096]">{o.sub}</div>
           </button>
         ))}
@@ -198,13 +198,13 @@ function Step6() {
   const [files, setFiles] = useState<string[]>([]);
   return (
     <div>
-      <div className="text-lg font-semibold text-[#101B1E] mb-1">Attachments</div>
+      <div className="text-lg font-semibold text-[var(--foreground)] mb-1">Attachments</div>
       <div className="text-sm text-[#5E7378] mb-6">Upload any relevant documents — briefs, specs, designs, or existing materials.</div>
       <div
         onDragOver={e => { e.preventDefault(); setDragging(true); }}
         onDragLeave={() => setDragging(false)}
         onDrop={e => { e.preventDefault(); setDragging(false); const f = Array.from(e.dataTransfer.files).map(f => f.name); setFiles(prev => [...prev, ...f]); }}
-        className={`border-2 border-dashed rounded-xl p-10 text-center transition-all ${dragging ? "border-[#2B6E78] bg-[rgba(43,110,120,0.06)]" : "border-[rgba(16,27,30,0.1)] hover:border-[rgba(43,110,120,0.3)] bg-[rgba(16,27,30,0.02)]"}`}
+        className={`border-2 border-dashed rounded-xl p-10 text-center transition-all ${dragging ? "border-[var(--primary)] bg-[color-mix(in_srgb,var(--primary)_6%,transparent)]" : "border-[rgba(16,27,30,0.1)] hover:border-[color-mix(in_srgb,var(--primary)_30%,transparent)] bg-[rgba(16,27,30,0.02)]"}`}
       >
         <div className="text-3xl mb-3 opacity-40">⬡</div>
         <div className="text-sm font-medium text-[#33474B] mb-1">Drag & drop files here</div>
@@ -238,7 +238,7 @@ function Step7({ data }: { data: FormData }) {
   const timelineLabels: Record<string, string> = { asap: "ASAP", "1-3m": "1–3 months", "3-6m": "3–6 months", "6-12m": "6–12 months", "12m+": "12+ months", flexible: "Flexible" };
   return (
     <div>
-      <div className="text-lg font-semibold text-[#101B1E] mb-1">Review Your Submission</div>
+      <div className="text-lg font-semibold text-[var(--foreground)] mb-1">Review Your Submission</div>
       <div className="text-sm text-[#5E7378] mb-6">Please review your project details before submitting.</div>
       <div className="space-y-4">
         {[
@@ -265,11 +265,11 @@ function SuccessState({ refNo, onDone }: { refNo: string; onDone: () => void }) 
     <div className="flex-1 flex items-center justify-center p-8">
       <div className="max-w-md text-center animate-fade-in">
         <div className="size-16 rounded-full bg-[rgba(74,222,128,0.15)] border border-[rgba(74,222,128,0.3)] flex items-center justify-center text-2xl mx-auto mb-6">✓</div>
-        <h2 className="text-2xl font-semibold text-[#101B1E] mb-2">Project Request Received</h2>
+        <h2 className="text-2xl font-semibold text-[var(--foreground)] mb-2">Project Request Received</h2>
         <p className="text-sm text-[#5E7378] mb-6">Our engineering team will review your submission and respond within 48 hours with a detailed proposal.</p>
         <div className="bg-[#FFFFFF] border border-[rgba(16,27,30,0.07)] rounded-xl p-4 mb-8">
           <div className="text-xs text-[#7C9096] mb-1">Your Reference Number</div>
-          <div className="text-xl font-mono font-semibold text-[#2B6E78]">{refNo}</div>
+          <div className="text-xl font-mono font-semibold text-[var(--primary)]">{refNo}</div>
           <div className="text-[11px] text-[#7C9096] mt-1">Keep this for your records</div>
         </div>
         <div className="flex gap-3 justify-center">
@@ -302,16 +302,16 @@ export default function ProjectInquiry({ onClose }: { onClose: () => void }) {
   if (submitted) return <SuccessState refNo={refNo} onDone={onClose} />;
 
   return (
-    <div className="min-h-screen bg-[#C7D3D4] flex flex-col">
+    <div className="min-h-screen bg-[var(--background)] flex flex-col">
       {/* Header */}
       <div className="border-b border-[rgba(16,27,30,0.07)] px-6 h-14 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="size-6 rounded-md bg-[#2B6E78] flex items-center justify-center">
+          <div className="size-6 rounded-md bg-[var(--primary)] flex items-center justify-center">
             <span className="text-white font-bold text-[10px] font-mono">N</span>
           </div>
-          <span className="text-sm font-semibold text-[#101B1E]">Start a Project</span>
+          <span className="text-sm font-semibold text-[var(--foreground)]">Start a Project</span>
         </div>
-        <button onClick={onClose} className="text-[#7C9096] hover:text-[#101B1E] transition-colors w-8 h-8 flex items-center justify-center rounded-lg hover:bg-[rgba(16,27,30,0.05)]">✕</button>
+        <button onClick={onClose} className="text-[#7C9096] hover:text-[var(--foreground)] transition-colors w-8 h-8 flex items-center justify-center rounded-lg hover:bg-[rgba(16,27,30,0.05)]">✕</button>
       </div>
 
       <div className="flex-1 flex flex-col items-center py-10 px-6">

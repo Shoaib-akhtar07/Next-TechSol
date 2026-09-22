@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Badge, Button, Card, KPICard, ProgressBar, Avatar, Tabs, Table, EmptyState, Modal, StatRow, Divider } from "../components/ui";
+import { DEFAULT_THEME, TEXT_SIZE_OPTIONS, applyTheme, loadTheme, saveTheme, type ThemeSettings } from "../theme";
 
 const NAV_ITEMS = [
   { id: "dashboard", icon: "⊞", label: "Dashboard" },
@@ -12,18 +13,18 @@ const NAV_ITEMS = [
   { id: "analytics", icon: "⬘", label: "Analytics" },
   { id: "roles", icon: "◉", label: "Roles & Permissions" },
   { id: "ai", icon: "⊟", label: "AI Assistant" },
-  { id: "settings", icon: "⊡", label: "Settings" },
+  { id: "settings", icon: "⊡", label: "Appearance" },
 ];
 
 function AdminSidebar({ active, onChange, onLogout }: { active: string; onChange: (id: string) => void; onLogout: () => void }) {
   return (
-    <aside className="w-56 flex-shrink-0 bg-[#C7D3D4] border-r border-[rgba(16,27,30,0.07)] flex flex-col">
+    <aside className="w-56 flex-shrink-0 bg-[var(--background)] border-r border-[rgba(16,27,30,0.07)] flex flex-col">
       <div className="h-14 flex items-center px-4 border-b border-[rgba(16,27,30,0.07)]">
         <div className="flex items-center gap-2">
-          <div className="size-6 rounded-md bg-[#2B6E78] flex items-center justify-center">
+          <div className="size-6 rounded-md bg-[var(--primary)] flex items-center justify-center">
             <span className="text-white font-bold text-[10px] font-mono">N</span>
           </div>
-          <span className="text-sm font-semibold text-[#101B1E]">Next TechSol</span>
+          <span className="text-sm font-semibold text-[var(--foreground)]">Next TechSol</span>
         </div>
         <div className="ml-auto">
           <Badge variant="danger" size="sm">Admin</Badge>
@@ -34,12 +35,12 @@ function AdminSidebar({ active, onChange, onLogout }: { active: string; onChange
           <button
             key={item.id}
             onClick={() => onChange(item.id)}
-            className={`w-full flex items-center gap-2.5 px-4 py-2 text-sm transition-all ${active === item.id ? "text-[#101B1E] bg-[rgba(43,110,120,0.1)] border-r-2 border-[#2B6E78]" : "text-[#5E7378] hover:text-[#4A6064] hover:bg-[rgba(16,27,30,0.02)]"}`}
+            className={`w-full flex items-center gap-2.5 px-4 py-2 text-sm transition-all ${active === item.id ? "text-[var(--foreground)] bg-[color-mix(in_srgb,var(--primary)_10%,transparent)] border-r-2 border-[var(--primary)]" : "text-[#5E7378] hover:text-[#4A6064] hover:bg-[rgba(16,27,30,0.02)]"}`}
           >
             <span className="text-base w-5 text-center">{item.icon}</span>
             <span className="flex-1 text-left">{item.label}</span>
             {item.badge && (
-              <span className="text-[10px] font-mono bg-[rgba(43,110,120,0.2)] text-[#2B6E78] px-1.5 py-0.5 rounded-full">{item.badge}</span>
+              <span className="text-[10px] font-mono bg-[color-mix(in_srgb,var(--primary)_20%,transparent)] text-[var(--primary)] px-1.5 py-0.5 rounded-full">{item.badge}</span>
             )}
           </button>
         ))}
@@ -48,7 +49,7 @@ function AdminSidebar({ active, onChange, onLogout }: { active: string; onChange
         <div className="flex items-center gap-2.5 mb-3">
           <Avatar name="Alex Rivera" size="sm" />
           <div>
-            <div className="text-xs font-medium text-[#101B1E]">Alex Rivera</div>
+            <div className="text-xs font-medium text-[var(--foreground)]">Alex Rivera</div>
             <div className="text-[10px] text-[#7C9096]">Super Admin</div>
           </div>
         </div>
@@ -61,10 +62,10 @@ function AdminSidebar({ active, onChange, onLogout }: { active: string; onChange
 function AdminTopBar({ title }: { title: string }) {
   return (
     <div className="h-14 flex items-center justify-between px-6 border-b border-[rgba(16,27,30,0.07)] flex-shrink-0">
-      <div className="text-sm font-semibold text-[#101B1E]">{title}</div>
+      <div className="text-sm font-semibold text-[var(--foreground)]">{title}</div>
       <div className="flex items-center gap-3">
         <kbd className="text-[10px] font-mono text-[#7C9096] bg-[rgba(16,27,30,0.05)] border border-[rgba(16,27,30,0.07)] px-1.5 py-0.5 rounded">⌘K</kbd>
-        <button className="relative w-8 h-8 flex items-center justify-center rounded-lg text-[#5E7378] hover:text-[#101B1E] hover:bg-[rgba(16,27,30,0.05)] transition-all">
+        <button className="relative w-8 h-8 flex items-center justify-center rounded-lg text-[#5E7378] hover:text-[var(--foreground)] hover:bg-[rgba(16,27,30,0.05)] transition-all">
           <span>◆</span>
           <span className="absolute top-1.5 right-1.5 size-1.5 rounded-full bg-[#DC2626]" />
         </button>
@@ -80,7 +81,7 @@ function ExecDashboard() {
     <div className="flex-1 overflow-y-auto p-6 animate-fade-in">
       <div className="max-w-7xl">
         <div className="mb-6">
-          <h2 className="text-xl font-semibold text-[#101B1E]">Management Overview</h2>
+          <h2 className="text-xl font-semibold text-[var(--foreground)]">Management Overview</h2>
           <p className="text-sm text-[#7C9096] mt-0.5">February 2026 · Last updated 5 minutes ago</p>
         </div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
@@ -95,7 +96,7 @@ function ExecDashboard() {
           <div className="lg:col-span-2">
             <Card>
               <div className="flex items-center justify-between mb-5">
-                <div className="text-sm font-semibold text-[#101B1E]">Revenue — Last 6 Months</div>
+                <div className="text-sm font-semibold text-[var(--foreground)]">Revenue — Last 6 Months</div>
                 <Badge variant="success" dot>+18.4% MoM</Badge>
               </div>
               <div className="relative h-40 flex items-end gap-3 pt-4">
@@ -109,7 +110,7 @@ function ExecDashboard() {
                       className="w-full rounded-t-md transition-all"
                       style={{
                         height: `${(d.val / 160) * 120}px`,
-                        background: i === arr.length - 1 ? "linear-gradient(to top, #2B6E78, #4F97A3)" : "rgba(43,110,120,0.2)",
+                        background: i === arr.length - 1 ? "linear-gradient(to top, var(--primary), color-mix(in srgb, var(--primary) 60%, white))" : "color-mix(in srgb, var(--primary) 20%, transparent)",
                       }}
                     />
                     <div className="text-[10px] text-[#7C9096]">{d.month}</div>
@@ -121,7 +122,7 @@ function ExecDashboard() {
 
           <div className="space-y-5">
             <Card>
-              <div className="text-sm font-semibold text-[#101B1E] mb-4">Project Health</div>
+              <div className="text-sm font-semibold text-[var(--foreground)] mb-4">Project Health</div>
               {[
                 { label: "On Track", count: 8, pct: 73, color: "#16A34A" },
                 { label: "At Risk", count: 2, pct: 18, color: "#CA8A04" },
@@ -133,7 +134,7 @@ function ExecDashboard() {
               ))}
             </Card>
             <Card>
-              <div className="text-sm font-semibold text-[#101B1E] mb-3">Key Metrics</div>
+              <div className="text-sm font-semibold text-[var(--foreground)] mb-3">Key Metrics</div>
               <StatRow label="Avg. Project Delivery" value="98.2%" sub="vs 97.8% last mo." />
               <StatRow label="Client Satisfaction" value="4.8 / 5.0" sub="Based on 12 reviews" />
               <StatRow label="Avg. Time to Win" value="14 days" sub="Lead to signed contract" />
@@ -146,7 +147,7 @@ function ExecDashboard() {
           {/* Active Projects Table */}
           <Card>
             <div className="flex items-center justify-between mb-4">
-              <div className="text-sm font-semibold text-[#101B1E]">Active Projects</div>
+              <div className="text-sm font-semibold text-[var(--foreground)]">Active Projects</div>
               <Button variant="ghost" size="sm">View all →</Button>
             </div>
             {[
@@ -171,13 +172,13 @@ function ExecDashboard() {
           {/* CRM Pipeline */}
           <Card>
             <div className="flex items-center justify-between mb-4">
-              <div className="text-sm font-semibold text-[#101B1E]">Sales Pipeline</div>
+              <div className="text-sm font-semibold text-[var(--foreground)]">Sales Pipeline</div>
               <Badge variant="info">$380K total</Badge>
             </div>
             {[
               { stage: "New", count: 5, value: "$68K", color: "#5E7378" },
               { stage: "Contacted", count: 4, value: "$54K", color: "#4A6064" },
-              { stage: "Qualified", count: 3, value: "$86K", color: "#2B6E78" },
+              { stage: "Qualified", count: 3, value: "$86K", color: "var(--primary)" },
               { stage: "Proposal", count: 4, value: "$112K", color: "#CA8A04" },
               { stage: "Negotiation", count: 2, value: "$60K", color: "#16A34A" },
             ].map(s => (
@@ -185,7 +186,7 @@ function ExecDashboard() {
                 <div className="size-2 rounded-full flex-shrink-0" style={{ background: s.color }} />
                 <span className="text-xs text-[#33474B] flex-1">{s.stage}</span>
                 <span className="text-[11px] font-mono text-[#7C9096]">{s.count} leads</span>
-                <span className="text-xs font-semibold text-[#101B1E]">{s.value}</span>
+                <span className="text-xs font-semibold text-[var(--foreground)]">{s.value}</span>
               </div>
             ))}
           </Card>
@@ -212,7 +213,7 @@ function CRMLeads() {
     <div className="flex-1 overflow-y-auto p-6 animate-fade-in">
       <div className="max-w-7xl">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-[#101B1E]">Lead Management</h2>
+          <h2 className="text-xl font-semibold text-[var(--foreground)]">Lead Management</h2>
           <div className="flex gap-3">
             <Tabs tabs={[{id:"all",label:"All",count:14},{id:"mine",label:"My Leads",count:5},{id:"new",label:"New",count:5}]} active={activeTab} onChange={setActiveTab} />
             <Button size="sm">+ Add Lead</Button>
@@ -221,7 +222,7 @@ function CRMLeads() {
         <div className="grid grid-cols-5 gap-3 mb-6">
           {["New", "Contacted", "Qualified", "Proposal", "Negotiation"].map((stage, i) => (
             <div key={stage} className="bg-[#FFFFFF] border border-[rgba(16,27,30,0.07)] rounded-xl p-3 text-center">
-              <div className="text-lg font-semibold text-[#101B1E]">{[5, 4, 3, 4, 2][i]}</div>
+              <div className="text-lg font-semibold text-[var(--foreground)]">{[5, 4, 3, 4, 2][i]}</div>
               <div className="text-[10px] text-[#7C9096]">{stage}</div>
             </div>
           ))}
@@ -229,10 +230,10 @@ function CRMLeads() {
         <Card className="!p-0 overflow-hidden">
           <Table
             columns={[
-              { key: "company", label: "Company", render: r => <span className="font-medium text-[#101B1E]">{String(r.company)}</span> },
+              { key: "company", label: "Company", render: r => <span className="font-medium text-[var(--foreground)]">{String(r.company)}</span> },
               { key: "contact", label: "Contact", render: r => <div className="flex items-center gap-1.5"><Avatar name={String(r.contact)} size="xs" /><span className="text-xs text-[#4A6064]">{String(r.contact)}</span></div> },
               { key: "stage", label: "Stage", render: r => <Badge variant={stageColor[String(r.stage)] || "neutral"} dot>{String(r.stage)}</Badge> },
-              { key: "value", label: "Est. Value", render: r => <span className="font-semibold text-[#101B1E]">{String(r.value)}</span> },
+              { key: "value", label: "Est. Value", render: r => <span className="font-semibold text-[var(--foreground)]">{String(r.value)}</span> },
               { key: "assigned", label: "Assigned", render: r => <div className="flex items-center gap-1.5"><Avatar name={String(r.assigned)} size="xs" /><span className="text-xs text-[#5E7378]">{String(r.assigned)}</span></div> },
               { key: "updated", label: "Updated", render: r => <span className="text-[11px] text-[#7C9096]">{String(r.updated)}</span> },
               { key: "actions", label: "", render: () => <div className="flex gap-1"><Button size="sm" variant="ghost">View</Button></div> },
@@ -250,7 +251,7 @@ function RolesPermissions() {
   const roles = [
     { name: "Super Admin", users: 2, color: "#DC2626", desc: "Full system access" },
     { name: "Admin", users: 3, color: "#CA8A04", desc: "All except destructive ops" },
-    { name: "Project Manager", users: 5, color: "#2B6E78", desc: "Project & team control" },
+    { name: "Project Manager", users: 5, color: "var(--primary)", desc: "Project & team control" },
     { name: "Developer", users: 12, color: "#16A34A", desc: "Task and code access" },
     { name: "Designer", users: 4, color: "#0284C7", desc: "Design and assets" },
     { name: "Finance", users: 2, color: "#7C3AED", desc: "Billing & invoices" },
@@ -274,7 +275,7 @@ function RolesPermissions() {
     <div className="flex-1 overflow-y-auto p-6 animate-fade-in">
       <div className="max-w-7xl">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-[#101B1E]">Roles & Permissions</h2>
+          <h2 className="text-xl font-semibold text-[var(--foreground)]">Roles & Permissions</h2>
           <Button size="sm">+ New Role</Button>
         </div>
         <div className="grid lg:grid-cols-4 gap-5">
@@ -285,11 +286,11 @@ function RolesPermissions() {
                 <button
                   key={r.name}
                   onClick={() => setActiveRole(r.name)}
-                  className={`w-full text-left p-3 rounded-xl border transition-all ${activeRole === r.name ? "bg-[rgba(43,110,120,0.08)] border-[rgba(43,110,120,0.3)]" : "bg-[#FFFFFF] border-[rgba(16,27,30,0.07)] hover:border-[rgba(16,27,30,0.12)]"}`}
+                  className={`w-full text-left p-3 rounded-xl border transition-all ${activeRole === r.name ? "bg-[color-mix(in_srgb,var(--primary)_8%,transparent)] border-[color-mix(in_srgb,var(--primary)_30%,transparent)]" : "bg-[#FFFFFF] border-[rgba(16,27,30,0.07)] hover:border-[rgba(16,27,30,0.12)]"}`}
                 >
                   <div className="flex items-center gap-2 mb-0.5">
                     <div className="size-2 rounded-full" style={{ background: r.color }} />
-                    <span className="text-xs font-medium text-[#101B1E]">{r.name}</span>
+                    <span className="text-xs font-medium text-[var(--foreground)]">{r.name}</span>
                   </div>
                   <div className="text-[10px] text-[#7C9096] ml-4">{r.users} users · {r.desc}</div>
                 </button>
@@ -368,20 +369,20 @@ function AIAssistant() {
       <div className="flex-1 overflow-y-auto p-6">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-8">
-            <div className="size-12 rounded-2xl bg-[rgba(43,110,120,0.15)] border border-[rgba(43,110,120,0.3)] flex items-center justify-center text-2xl mx-auto mb-3">◈</div>
-            <div className="text-sm font-semibold text-[#101B1E]">Next TechSol AI Assistant</div>
+            <div className="size-12 rounded-2xl bg-[color-mix(in_srgb,var(--primary)_15%,transparent)] border border-[color-mix(in_srgb,var(--primary)_30%,transparent)] flex items-center justify-center text-2xl mx-auto mb-3">◈</div>
+            <div className="text-sm font-semibold text-[var(--foreground)]">Next TechSol AI Assistant</div>
             <div className="text-xs text-[#7C9096]">Connected to your project workspace</div>
           </div>
           <div className="space-y-4">
             {messages.map((msg, i) => (
               <div key={i} className={`flex gap-3 ${msg.role === "user" ? "flex-row-reverse" : ""}`}>
                 {msg.role === "assistant" ? (
-                  <div className="size-7 rounded-full bg-[rgba(43,110,120,0.2)] border border-[rgba(43,110,120,0.3)] flex items-center justify-center text-[#2B6E78] text-xs flex-shrink-0">◈</div>
+                  <div className="size-7 rounded-full bg-[color-mix(in_srgb,var(--primary)_20%,transparent)] border border-[color-mix(in_srgb,var(--primary)_30%,transparent)] flex items-center justify-center text-[var(--primary)] text-xs flex-shrink-0">◈</div>
                 ) : (
                   <Avatar name="Alex Rivera" size="sm" />
                 )}
                 <div className={`max-w-lg ${msg.role === "user" ? "items-end" : "items-start"} flex flex-col gap-1`}>
-                  <div className={`px-4 py-3 rounded-2xl text-sm ${msg.role === "user" ? "bg-[#2B6E78] text-white rounded-tr-sm" : "bg-[#FFFFFF] border border-[rgba(16,27,30,0.08)] text-[#33474B] rounded-tl-sm"}`}>
+                  <div className={`px-4 py-3 rounded-2xl text-sm ${msg.role === "user" ? "bg-[var(--primary)] text-white rounded-tr-sm" : "bg-[#FFFFFF] border border-[rgba(16,27,30,0.08)] text-[#33474B] rounded-tl-sm"}`}>
                     {msg.content}
                   </div>
                   <span className="text-[10px] text-[#7C9096]">{msg.ts}</span>
@@ -390,23 +391,23 @@ function AIAssistant() {
             ))}
             {loading && (
               <div className="flex gap-3">
-                <div className="size-7 rounded-full bg-[rgba(43,110,120,0.2)] border border-[rgba(43,110,120,0.3)] flex items-center justify-center text-[#2B6E78] text-xs">◈</div>
+                <div className="size-7 rounded-full bg-[color-mix(in_srgb,var(--primary)_20%,transparent)] border border-[color-mix(in_srgb,var(--primary)_30%,transparent)] flex items-center justify-center text-[var(--primary)] text-xs">◈</div>
                 <div className="bg-[#FFFFFF] border border-[rgba(16,27,30,0.08)] px-4 py-3 rounded-2xl rounded-tl-sm">
                   <div className="flex gap-1.5 items-center h-4">
                     {[0, 150, 300].map(delay => (
-                      <div key={delay} className="size-1.5 rounded-full bg-[#2B6E78] animate-bounce" style={{ animationDelay: `${delay}ms` }} />
+                      <div key={delay} className="size-1.5 rounded-full bg-[var(--primary)] animate-bounce" style={{ animationDelay: `${delay}ms` }} />
                     ))}
                   </div>
                 </div>
               </div>
             )}
             {pendingAction && (
-              <div className="bg-[rgba(43,110,120,0.06)] border border-[rgba(43,110,120,0.2)] rounded-2xl p-4">
-                <div className="text-xs font-semibold text-[#2B6E78] mb-3">⚠ Action Requires Confirmation — Create Tasks</div>
+              <div className="bg-[color-mix(in_srgb,var(--primary)_6%,transparent)] border border-[color-mix(in_srgb,var(--primary)_20%,transparent)] rounded-2xl p-4">
+                <div className="text-xs font-semibold text-[var(--primary)] mb-3">⚠ Action Requires Confirmation — Create Tasks</div>
                 <div className="grid grid-cols-2 gap-2 mb-4">
                   {pendingAction.data.map(task => (
                     <div key={task} className="flex items-center gap-2 text-xs text-[#33474B]">
-                      <div className="size-1.5 rounded-full bg-[#2B6E78]" />
+                      <div className="size-1.5 rounded-full bg-[var(--primary)]" />
                       {task}
                     </div>
                   ))}
@@ -427,7 +428,7 @@ function AIAssistant() {
         <div className="max-w-3xl mx-auto">
           <div className="flex gap-2 mb-3">
             {["Create tasks for auth module", "Project health report", "Analyze sprint velocity", "Who's overloaded?"].map(s => (
-              <button key={s} onClick={() => setInput(s)} className="text-[11px] px-3 py-1.5 bg-[#FFFFFF] border border-[rgba(16,27,30,0.08)] rounded-full text-[#5E7378] hover:text-[#101B1E] hover:border-[rgba(43,110,120,0.3)] transition-all whitespace-nowrap">
+              <button key={s} onClick={() => setInput(s)} className="text-[11px] px-3 py-1.5 bg-[#FFFFFF] border border-[rgba(16,27,30,0.08)] rounded-full text-[#5E7378] hover:text-[var(--foreground)] hover:border-[color-mix(in_srgb,var(--primary)_30%,transparent)] transition-all whitespace-nowrap">
                 {s}
               </button>
             ))}
@@ -438,7 +439,7 @@ function AIAssistant() {
               onChange={e => setInput(e.target.value)}
               onKeyDown={e => e.key === "Enter" && !e.shiftKey && handleSend()}
               placeholder="Ask me anything about your projects..."
-              className="flex-1 h-10 bg-[#FFFFFF] border border-[rgba(16,27,30,0.08)] rounded-xl px-4 text-sm text-[#101B1E] placeholder:text-[#7C9096] focus:border-[rgba(43,110,120,0.4)] focus:outline-none transition-all"
+              className="flex-1 h-10 bg-[#FFFFFF] border border-[rgba(16,27,30,0.08)] rounded-xl px-4 text-sm text-[var(--foreground)] placeholder:text-[#7C9096] focus:border-[color-mix(in_srgb,var(--primary)_40%,transparent)] focus:outline-none transition-all"
             />
             <Button onClick={handleSend} disabled={!input.trim() || loading}>Send</Button>
           </div>
@@ -461,7 +462,7 @@ function Employees() {
     <div className="flex-1 overflow-y-auto p-6 animate-fade-in">
       <div className="max-w-6xl">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-[#101B1E]">Team</h2>
+          <h2 className="text-xl font-semibold text-[var(--foreground)]">Team</h2>
           <Button size="sm">+ Add Member</Button>
         </div>
         <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
@@ -470,7 +471,7 @@ function Employees() {
               <div className="flex items-start gap-3 mb-4">
                 <Avatar name={emp.name} size="md" />
                 <div className="flex-1 min-w-0">
-                  <div className="text-sm font-semibold text-[#101B1E]">{emp.name}</div>
+                  <div className="text-sm font-semibold text-[var(--foreground)]">{emp.name}</div>
                   <div className="text-xs text-[#5E7378]">{emp.role}</div>
                   <div className="text-[10px] font-mono text-[#7C9096]">{emp.dept}</div>
                 </div>
@@ -489,13 +490,116 @@ function Employees() {
   );
 }
 
+// ── Appearance Settings ────────────────────────────────────────────────────
+function ColorField({ label, value, onChange }: { label: string; value: string; onChange: (v: string) => void }) {
+  const [draft, setDraft] = useState(value);
+  const isValid = /^#[0-9a-fA-F]{6}$/.test(draft);
+  return (
+    <div className="flex flex-col gap-1.5">
+      <label className="text-xs font-medium text-[#4A6064] tracking-wide uppercase">{label}</label>
+      <div className="flex items-center gap-2">
+        <input
+          type="color"
+          value={isValid ? draft : value}
+          onChange={e => { setDraft(e.target.value); onChange(e.target.value); }}
+          className="size-9 rounded-md border border-[rgba(16,27,30,0.1)] cursor-pointer bg-transparent p-0.5"
+        />
+        <input
+          type="text"
+          value={draft}
+          onChange={e => {
+            setDraft(e.target.value);
+            if (/^#[0-9a-fA-F]{6}$/.test(e.target.value)) onChange(e.target.value);
+          }}
+          className={`w-24 h-9 bg-[#FFFFFF] border rounded-md px-2.5 text-sm font-mono text-[var(--foreground)] focus:outline-none transition-all ${isValid ? "border-[rgba(16,27,30,0.1)] focus:border-[var(--primary)]" : "border-[rgba(220,38,38,0.5)]"}`}
+        />
+      </div>
+    </div>
+  );
+}
+
+function AppearanceSettings() {
+  const [theme, setTheme] = useState<ThemeSettings>(() => loadTheme());
+
+  const update = (patch: Partial<ThemeSettings>) => {
+    const next = { ...theme, ...patch };
+    setTheme(next);
+    applyTheme(next);
+    saveTheme(next);
+  };
+
+  const reset = () => {
+    setTheme(DEFAULT_THEME);
+    applyTheme(DEFAULT_THEME);
+    saveTheme(DEFAULT_THEME);
+  };
+
+  return (
+    <div className="flex-1 overflow-y-auto p-6 animate-fade-in">
+      <div className="max-w-4xl">
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h2 className="text-xl font-semibold text-[var(--foreground)]">Appearance</h2>
+            <p className="text-sm text-[#7C9096] mt-0.5">Changes apply live across the whole site and are saved to this browser.</p>
+          </div>
+          <Button variant="secondary" size="sm" onClick={reset}>Reset to Defaults</Button>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-5">
+          <Card>
+            <div className="text-sm font-semibold text-[var(--foreground)] mb-4">Text Size</div>
+            <div className="flex gap-2 flex-wrap">
+              {TEXT_SIZE_OPTIONS.map(opt => (
+                <button
+                  key={opt.label}
+                  onClick={() => update({ textScale: opt.value })}
+                  className={`px-3.5 py-2 rounded-lg text-sm font-medium border transition-all ${theme.textScale === opt.value ? "bg-[var(--primary)] border-[var(--primary)] text-white" : "bg-[#FFFFFF] border-[rgba(16,27,30,0.1)] text-[#5E7378] hover:border-[var(--primary)]"}`}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+          </Card>
+
+          <Card>
+            <div className="text-sm font-semibold text-[var(--foreground)] mb-4">Brand Colors</div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              <ColorField label="Accent" value={theme.primary} onChange={v => update({ primary: v })} />
+              <ColorField label="Background" value={theme.background} onChange={v => update({ background: v })} />
+              <ColorField label="Text" value={theme.foreground} onChange={v => update({ foreground: v })} />
+            </div>
+          </Card>
+        </div>
+
+        <div className="mt-5">
+          <Card>
+            <div className="text-sm font-semibold text-[var(--foreground)] mb-4">Live Preview</div>
+            <div className="flex flex-wrap items-center gap-3">
+              <Button>Primary Button</Button>
+              <Button variant="secondary">Secondary Button</Button>
+              <Button variant="outline">Outline</Button>
+              <Badge>Default</Badge>
+              <Badge variant="success">Success</Badge>
+              <Badge variant="danger">Danger</Badge>
+            </div>
+            <div className="mt-5 p-4 rounded-xl bg-[var(--background)] border border-[rgba(16,27,30,0.08)]">
+              <div className="text-base font-semibold text-[var(--foreground)] mb-1">Sample heading</div>
+              <p className="text-sm text-[#5E7378]">This paragraph reflects your current text size and color choices, on the current page background.</p>
+            </div>
+          </Card>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function AdminPortal({ onLogout }: { onLogout: () => void }) {
   const [activeView, setActiveView] = useState("dashboard");
   const titles: Record<string, string> = {
     dashboard: "Management Dashboard", leads: "Lead Management", customers: "Customers",
     projects: "Projects", employees: "Team", teams: "Teams",
     invoices: "Invoices", analytics: "Analytics", roles: "Roles & Permissions",
-    ai: "AI Assistant", settings: "Settings",
+    ai: "AI Assistant", settings: "Appearance",
   };
   const renderView = () => {
     switch (activeView) {
@@ -504,6 +608,7 @@ export default function AdminPortal({ onLogout }: { onLogout: () => void }) {
       case "roles": return <RolesPermissions />;
       case "ai": return <AIAssistant />;
       case "employees": return <Employees />;
+      case "settings": return <AppearanceSettings />;
       default: return (
         <div className="flex-1 flex items-center justify-center">
           <EmptyState icon="⊡" title={titles[activeView]} description="This module is under active development." action={<Button size="sm" variant="secondary" onClick={() => setActiveView("dashboard")}>Back to Dashboard</Button>} />
@@ -512,7 +617,7 @@ export default function AdminPortal({ onLogout }: { onLogout: () => void }) {
     }
   };
   return (
-    <div className="h-screen flex bg-[#C7D3D4] overflow-hidden">
+    <div className="h-screen flex bg-[var(--background)] overflow-hidden">
       <AdminSidebar active={activeView} onChange={setActiveView} onLogout={onLogout} />
       <div className="flex-1 flex flex-col min-w-0">
         <AdminTopBar title={titles[activeView] || activeView} />

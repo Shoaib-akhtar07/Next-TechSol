@@ -9,7 +9,7 @@ interface BadgeProps {
 }
 export function Badge({ children, variant = "default", size = "sm", dot }: BadgeProps) {
   const variantClass = {
-    default: "bg-[rgba(43,110,120,0.12)] text-[#2B6E78] border border-[rgba(43,110,120,0.2)]",
+    default: "bg-[color-mix(in_srgb,var(--primary)_12%,transparent)] text-[var(--primary)] border border-[color-mix(in_srgb,var(--primary)_20%,transparent)]",
     success: "bg-[rgba(34,197,94,0.1)] text-[#16A34A] border border-[rgba(34,197,94,0.2)]",
     warning: "bg-[rgba(234,179,8,0.1)] text-[#CA8A04] border border-[rgba(234,179,8,0.2)]",
     danger: "bg-[rgba(239,68,68,0.1)] text-[#DC2626] border border-[rgba(239,68,68,0.2)]",
@@ -17,7 +17,7 @@ export function Badge({ children, variant = "default", size = "sm", dot }: Badge
     neutral: "bg-[rgba(16,27,30,0.06)] text-[#4A6064] border border-[rgba(16,27,30,0.08)]",
   }[variant];
   const dotColor = {
-    default: "bg-[#2B6E78]", success: "bg-[#16A34A]", warning: "bg-[#CA8A04]",
+    default: "bg-[var(--primary)]", success: "bg-[#16A34A]", warning: "bg-[#CA8A04]",
     danger: "bg-[#DC2626]", info: "bg-[#0284C7]", neutral: "bg-[#4A6064]",
   }[variant];
   return (
@@ -37,13 +37,13 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   iconRight?: React.ReactNode;
 }
 export function Button({ children, variant = "primary", size = "md", loading, icon, iconRight, className = "", ...props }: ButtonProps) {
-  const base = "inline-flex items-center justify-center gap-2 font-medium transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2B6E78] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer select-none";
+  const base = "inline-flex items-center justify-center gap-2 font-medium transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer select-none";
   const variants = {
-    primary: "bg-[#2B6E78] text-white hover:bg-[#235761] active:bg-[#1C464C]",
-    secondary: "bg-[#FFFFFF] text-[#101B1E] border border-[rgba(16,27,30,0.08)] hover:bg-[#EAF1F1] hover:border-[rgba(16,27,30,0.14)]",
-    ghost: "text-[#4A6064] hover:text-[#101B1E] hover:bg-[rgba(16,27,30,0.05)]",
+    primary: "bg-[var(--primary)] text-white hover:bg-[color-mix(in_srgb,var(--primary)_82%,black)] active:bg-[color-mix(in_srgb,var(--primary)_65%,black)]",
+    secondary: "bg-[#FFFFFF] text-[var(--foreground)] border border-[rgba(16,27,30,0.08)] hover:bg-[#EAF1F1] hover:border-[rgba(16,27,30,0.14)]",
+    ghost: "text-[#4A6064] hover:text-[var(--foreground)] hover:bg-[rgba(16,27,30,0.05)]",
     danger: "bg-[rgba(239,68,68,0.1)] text-[#DC2626] border border-[rgba(239,68,68,0.2)] hover:bg-[rgba(239,68,68,0.18)]",
-    outline: "border border-[rgba(43,110,120,0.4)] text-[#2B6E78] hover:bg-[rgba(43,110,120,0.08)]",
+    outline: "border border-[color-mix(in_srgb,var(--primary)_40%,transparent)] text-[var(--primary)] hover:bg-[color-mix(in_srgb,var(--primary)_8%,transparent)]",
   }[variant];
   const sizes = { sm: "h-7 px-3 text-xs rounded-md", md: "h-9 px-4 text-sm rounded-md", lg: "h-11 px-6 text-sm rounded-lg" }[size];
   return (
@@ -80,7 +80,7 @@ export function Input({ label, error, icon, className = "", ...props }: InputPro
         {icon && <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#7C9096]">{icon}</span>}
         <input
           {...props}
-          className={`w-full h-9 bg-[#FFFFFF] border border-[rgba(16,27,30,0.08)] rounded-md text-sm text-[#101B1E] placeholder:text-[#7C9096] focus:border-[#2B6E78] focus:outline-none focus:ring-1 focus:ring-[rgba(43,110,120,0.3)] transition-all ${icon ? "pl-9" : "pl-3"} pr-3 ${error ? "border-[rgba(239,68,68,0.5)]" : ""} ${className}`}
+          className={`w-full h-9 bg-[#FFFFFF] border border-[rgba(16,27,30,0.08)] rounded-md text-sm text-[var(--foreground)] placeholder:text-[#7C9096] focus:border-[var(--primary)] focus:outline-none focus:ring-1 focus:ring-[color-mix(in_srgb,var(--primary)_30%,transparent)] transition-all ${icon ? "pl-9" : "pl-3"} pr-3 ${error ? "border-[rgba(239,68,68,0.5)]" : ""} ${className}`}
         />
       </div>
       {error && <span className="text-xs text-[#DC2626]">{error}</span>}
@@ -99,7 +99,7 @@ export function Textarea({ label, error, className = "", ...props }: TextareaPro
       {label && <label className="text-xs font-medium text-[#4A6064] tracking-wide uppercase">{label}</label>}
       <textarea
         {...props}
-        className={`w-full bg-[#FFFFFF] border border-[rgba(16,27,30,0.08)] rounded-md text-sm text-[#101B1E] placeholder:text-[#7C9096] focus:border-[#2B6E78] focus:outline-none focus:ring-1 focus:ring-[rgba(43,110,120,0.3)] transition-all p-3 resize-none ${error ? "border-[rgba(239,68,68,0.5)]" : ""} ${className}`}
+        className={`w-full bg-[#FFFFFF] border border-[rgba(16,27,30,0.08)] rounded-md text-sm text-[var(--foreground)] placeholder:text-[#7C9096] focus:border-[var(--primary)] focus:outline-none focus:ring-1 focus:ring-[color-mix(in_srgb,var(--primary)_30%,transparent)] transition-all p-3 resize-none ${error ? "border-[rgba(239,68,68,0.5)]" : ""} ${className}`}
       />
       {error && <span className="text-xs text-[#DC2626]">{error}</span>}
     </div>
@@ -118,7 +118,7 @@ export function Select({ label, error, options, className = "", ...props }: Sele
       {label && <label className="text-xs font-medium text-[#4A6064] tracking-wide uppercase">{label}</label>}
       <select
         {...props}
-        className={`w-full h-9 bg-[#FFFFFF] border border-[rgba(16,27,30,0.08)] rounded-md text-sm text-[#101B1E] focus:border-[#2B6E78] focus:outline-none focus:ring-1 focus:ring-[rgba(43,110,120,0.3)] transition-all px-3 appearance-none cursor-pointer ${className}`}
+        className={`w-full h-9 bg-[#FFFFFF] border border-[rgba(16,27,30,0.08)] rounded-md text-sm text-[var(--foreground)] focus:border-[var(--primary)] focus:outline-none focus:ring-1 focus:ring-[color-mix(in_srgb,var(--primary)_30%,transparent)] transition-all px-3 appearance-none cursor-pointer ${className}`}
       >
         {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
       </select>
@@ -137,7 +137,7 @@ export function Card({ children, className = "", hover, onClick }: CardProps) {
   return (
     <div
       onClick={onClick}
-      className={`bg-[#FFFFFF] border border-[rgba(16,27,30,0.07)] rounded-xl p-5 ${hover ? "hover:border-[rgba(43,110,120,0.3)] hover:bg-[#F4F8F8] transition-all cursor-pointer" : ""} ${className}`}
+      className={`bg-[#FFFFFF] border border-[rgba(16,27,30,0.07)] rounded-xl p-5 ${hover ? "hover:border-[color-mix(in_srgb,var(--primary)_30%,transparent)] hover:bg-[#F4F8F8] transition-all cursor-pointer" : ""} ${className}`}
     >
       {children}
     </div>
@@ -155,12 +155,12 @@ interface KPICardProps {
 }
 export function KPICard({ label, value, change, changePositive, icon, accent }: KPICardProps) {
   return (
-    <Card className={accent ? "border-[rgba(43,110,120,0.3)] bg-gradient-to-br from-[rgba(43,110,120,0.08)] to-[#FFFFFF]" : ""}>
+    <Card className={accent ? "border-[color-mix(in_srgb,var(--primary)_30%,transparent)] bg-gradient-to-br from-[color-mix(in_srgb,var(--primary)_8%,transparent)] to-[#FFFFFF]" : ""}>
       <div className="flex items-start justify-between mb-4">
         <span className="text-xs font-medium text-[#5E7378] uppercase tracking-wider">{label}</span>
-        {icon && <span className={`text-lg ${accent ? "text-[#2B6E78]" : "text-[#7C9096]"}`}>{icon}</span>}
+        {icon && <span className={`text-lg ${accent ? "text-[var(--primary)]" : "text-[#7C9096]"}`}>{icon}</span>}
       </div>
-      <div className="text-2xl font-semibold text-[#101B1E] tracking-tight mb-1">{value}</div>
+      <div className="text-2xl font-semibold text-[var(--foreground)] tracking-tight mb-1">{value}</div>
       {change && (
         <div className={`text-xs font-medium ${changePositive ? "text-[#16A34A]" : "text-[#DC2626]"}`}>
           {changePositive ? "↑" : "↓"} {change} vs last month
@@ -171,7 +171,7 @@ export function KPICard({ label, value, change, changePositive, icon, accent }: 
 }
 
 // ── Progress Bar ───────────────────────────────────────────────────────────
-export function ProgressBar({ value, max = 100, color = "#2B6E78", label, showPercent }: { value: number; max?: number; color?: string; label?: string; showPercent?: boolean }) {
+export function ProgressBar({ value, max = 100, color = "var(--primary)", label, showPercent }: { value: number; max?: number; color?: string; label?: string; showPercent?: boolean }) {
   const pct = Math.min(100, Math.round((value / max) * 100));
   return (
     <div className="w-full">
@@ -191,11 +191,11 @@ export function ProgressBar({ value, max = 100, color = "#2B6E78", label, showPe
 // ── Avatar ─────────────────────────────────────────────────────────────────
 export function Avatar({ name, size = "md", src }: { name: string; size?: "xs" | "sm" | "md" | "lg"; src?: string }) {
   const initials = name.split(" ").map(n => n[0]).slice(0, 2).join("");
-  const colors = ["#2B6E78", "#6D28D9", "#0E7490", "#047857", "#B45309", "#B91C1C"];
+  const colors = ["var(--primary)", "#6D28D9", "#0E7490", "#047857", "#B45309", "#B91C1C"];
   const color = colors[name.charCodeAt(0) % colors.length];
   const sizes = { xs: "size-6 text-[9px]", sm: "size-7 text-[10px]", md: "size-8 text-xs", lg: "size-10 text-sm" }[size];
   return (
-    <div className={`${sizes} rounded-full flex items-center justify-center font-semibold flex-shrink-0 overflow-hidden`} style={{ backgroundColor: src ? "transparent" : `${color}22`, color }}>
+    <div className={`${sizes} rounded-full flex items-center justify-center font-semibold flex-shrink-0 overflow-hidden`} style={{ backgroundColor: src ? "transparent" : `color-mix(in srgb, ${color} 13%, transparent)`, color }}>
       {src ? <img src={src} alt={name} className="w-full h-full object-cover" /> : initials}
     </div>
   );
@@ -214,11 +214,11 @@ export function Tabs({ tabs, active, onChange }: TabsProps) {
         <button
           key={t.id}
           onClick={() => onChange(t.id)}
-          className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${active === t.id ? "bg-[#FFFFFF] text-[#101B1E] shadow-sm" : "text-[#5E7378] hover:text-[#4A6064]"}`}
+          className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${active === t.id ? "bg-[#FFFFFF] text-[var(--foreground)] shadow-sm" : "text-[#5E7378] hover:text-[#4A6064]"}`}
         >
           {t.label}
           {t.count !== undefined && (
-            <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded-full ${active === t.id ? "bg-[rgba(43,110,120,0.15)] text-[#2B6E78]" : "bg-[rgba(16,27,30,0.05)] text-[#7C9096]"}`}>
+            <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded-full ${active === t.id ? "bg-[color-mix(in_srgb,var(--primary)_15%,transparent)] text-[var(--primary)]" : "bg-[rgba(16,27,30,0.05)] text-[#7C9096]"}`}>
               {t.count}
             </span>
           )}
@@ -279,8 +279,8 @@ export function Modal({ open, onClose, title, children, size = "md" }: ModalProp
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
       <div className={`relative w-full ${sizes} bg-[#FFFFFF] border border-[rgba(16,27,30,0.1)] rounded-2xl shadow-2xl animate-fade-in`}>
         <div className="flex items-center justify-between p-5 border-b border-[rgba(16,27,30,0.07)]">
-          <h3 className="text-base font-semibold text-[#101B1E]">{title}</h3>
-          <button onClick={onClose} className="text-[#7C9096] hover:text-[#101B1E] transition-colors w-7 h-7 flex items-center justify-center rounded-md hover:bg-[rgba(16,27,30,0.05)]">✕</button>
+          <h3 className="text-base font-semibold text-[var(--foreground)]">{title}</h3>
+          <button onClick={onClose} className="text-[#7C9096] hover:text-[var(--foreground)] transition-colors w-7 h-7 flex items-center justify-center rounded-md hover:bg-[rgba(16,27,30,0.05)]">✕</button>
         </div>
         <div className="p-5">{children}</div>
       </div>
@@ -291,7 +291,7 @@ export function Modal({ open, onClose, title, children, size = "md" }: ModalProp
 // ── Toast ──────────────────────────────────────────────────────────────────
 export function Toast({ message, type = "success", onClose }: { message: string; type?: "success" | "error" | "info"; onClose: () => void }) {
   useEffect(() => { const t = setTimeout(onClose, 3500); return () => clearTimeout(t); }, [onClose]);
-  const colors = { success: "border-[rgba(74,222,128,0.3)] text-[#16A34A]", error: "border-[rgba(248,113,113,0.3)] text-[#DC2626]", info: "border-[rgba(43,110,120,0.3)] text-[#2B6E78]" }[type];
+  const colors = { success: "border-[rgba(74,222,128,0.3)] text-[#16A34A]", error: "border-[rgba(248,113,113,0.3)] text-[#DC2626]", info: "border-[color-mix(in_srgb,var(--primary)_30%,transparent)] text-[var(--primary)]" }[type];
   const icon = { success: "✓", error: "✕", info: "ℹ" }[type];
   return (
     <div className={`fixed bottom-6 right-6 z-[100] flex items-center gap-3 bg-[#FFFFFF] border ${colors} rounded-xl px-4 py-3 shadow-2xl animate-fade-in min-w-[280px]`}>
@@ -308,7 +308,7 @@ export function StatRow({ label, value, sub }: { label: string; value: string; s
     <div className="flex items-center justify-between py-2.5 border-b border-[rgba(16,27,30,0.05)] last:border-0">
       <span className="text-sm text-[#4A6064]">{label}</span>
       <div className="text-right">
-        <div className="text-sm font-medium text-[#101B1E]">{value}</div>
+        <div className="text-sm font-medium text-[var(--foreground)]">{value}</div>
         {sub && <div className="text-xs text-[#7C9096]">{sub}</div>}
       </div>
     </div>
@@ -349,7 +349,7 @@ export function SearchBar({ placeholder = "Search...", value, onChange }: { plac
         placeholder={placeholder}
         value={value}
         onChange={e => onChange(e.target.value)}
-        className="h-8 pl-7 pr-3 bg-[rgba(16,27,30,0.04)] border border-[rgba(16,27,30,0.07)] rounded-lg text-sm text-[#101B1E] placeholder:text-[#7C9096] focus:border-[rgba(43,110,120,0.4)] focus:outline-none focus:bg-[rgba(16,27,30,0.05)] transition-all w-full"
+        className="h-8 pl-7 pr-3 bg-[rgba(16,27,30,0.04)] border border-[rgba(16,27,30,0.07)] rounded-lg text-sm text-[var(--foreground)] placeholder:text-[#7C9096] focus:border-[color-mix(in_srgb,var(--primary)_40%,transparent)] focus:outline-none focus:bg-[rgba(16,27,30,0.05)] transition-all w-full"
       />
     </div>
   );
@@ -383,7 +383,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
             value={q}
             onChange={e => setQ(e.target.value)}
             placeholder="Search projects, tasks, clients, team..."
-            className="flex-1 bg-transparent text-sm text-[#101B1E] placeholder:text-[#7C9096] focus:outline-none"
+            className="flex-1 bg-transparent text-sm text-[var(--foreground)] placeholder:text-[#7C9096] focus:outline-none"
           />
           <kbd className="text-[10px] font-mono text-[#7C9096] bg-[rgba(16,27,30,0.05)] border border-[rgba(16,27,30,0.07)] px-1.5 py-0.5 rounded">ESC</kbd>
         </div>
@@ -392,7 +392,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
             <div key={section.section}>
               <div className="px-4 py-2 text-[10px] font-mono text-[#7C9096] uppercase tracking-widest">{section.section}</div>
               {section.items.filter(i => !q || i.toLowerCase().includes(q.toLowerCase())).map(item => (
-                <button key={item} onClick={onClose} className="w-full text-left px-4 py-2 text-sm text-[#33474B] hover:bg-[rgba(16,27,30,0.04)] hover:text-[#101B1E] transition-colors">
+                <button key={item} onClick={onClose} className="w-full text-left px-4 py-2 text-sm text-[#33474B] hover:bg-[rgba(16,27,30,0.04)] hover:text-[var(--foreground)] transition-colors">
                   {item}
                 </button>
               ))}
