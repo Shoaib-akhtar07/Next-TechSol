@@ -17,9 +17,9 @@ function LoginScreen({ role, onLogin, onBack }: { role: "customer" | "employee" 
   const [loading, setLoading] = useState(false);
 
   const config = {
-    customer: { label: "Client Portal", badge: "Client", accent: "#4f6ef7", prefill: "james@atlasgroup.com" },
-    employee: { label: "Team Workspace", badge: "Team", accent: "#4ade80", prefill: "sarah@arcanesystems.io" },
-    admin: { label: "Admin Panel", badge: "Admin", accent: "#f87171", prefill: "alex@arcanesystems.io" },
+    customer: { label: "Client Portal", badge: "Client", accent: "#2B6E78", prefill: "james@atlasgroup.com" },
+    employee: { label: "Team Workspace", badge: "Team", accent: "#16A34A", prefill: "sarah@arcanesystems.io" },
+    admin: { label: "Admin Panel", badge: "Admin", accent: "#DC2626", prefill: "alex@arcanesystems.io" },
   }[role];
 
   const handleLogin = () => {
@@ -28,43 +28,43 @@ function LoginScreen({ role, onLogin, onBack }: { role: "customer" | "employee" 
   };
 
   return (
-    <div className="min-h-screen bg-[#09090c] flex items-center justify-center p-6 grid-pattern">
-      <div className="absolute inset-0 bg-gradient-radial" style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(79,110,247,0.06) 0%, transparent 60%)" }} />
+    <div className="min-h-screen bg-[#C7D3D4] flex items-center justify-center p-6 grid-pattern">
+      <div className="absolute inset-0 bg-gradient-radial" style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(43,110,120,0.06) 0%, transparent 60%)" }} />
       <div className="relative w-full max-w-sm animate-fade-in">
-        <button onClick={onBack} className="flex items-center gap-1.5 text-xs text-[#5a5a66] hover:text-[#9494a0] mb-8 transition-colors">
+        <button onClick={onBack} className="flex items-center gap-1.5 text-xs text-[#7C9096] hover:text-[#4A6064] mb-8 transition-colors">
           ← Back to website
         </button>
-        <div className="bg-[#111118] border border-[rgba(255,255,255,0.08)] rounded-2xl p-8">
+        <div className="bg-[#FFFFFF] border border-[rgba(16,27,30,0.08)] rounded-2xl p-8">
           <div className="flex items-center gap-2 mb-8">
-            <div className="size-8 rounded-lg bg-[#4f6ef7] flex items-center justify-center">
-              <span className="text-white font-bold text-xs font-mono">A</span>
+            <div className="size-8 rounded-lg bg-[#2B6E78] flex items-center justify-center">
+              <span className="text-white font-bold text-xs font-mono">N</span>
             </div>
             <div>
-              <div className="text-sm font-semibold text-[#f1f1f3]">Arcane Systems</div>
-              <div className="text-[10px] text-[#5a5a66]">{config.label}</div>
+              <div className="text-sm font-semibold text-[#101B1E]">Next TechSol</div>
+              <div className="text-[10px] text-[#7C9096]">{config.label}</div>
             </div>
           </div>
 
-          <h1 className="text-xl font-semibold text-[#f1f1f3] mb-1">Sign in</h1>
-          <p className="text-xs text-[#5a5a66] mb-6">Access your {config.label.toLowerCase()}</p>
+          <h1 className="text-xl font-semibold text-[#101B1E] mb-1">Sign in</h1>
+          <p className="text-xs text-[#7C9096] mb-6">Access your {config.label.toLowerCase()}</p>
 
           <div className="space-y-4 mb-6">
             <div>
-              <label className="text-[10px] font-medium text-[#9494a0] uppercase tracking-wider block mb-1.5">Email</label>
+              <label className="text-[10px] font-medium text-[#4A6064] uppercase tracking-wider block mb-1.5">Email</label>
               <input
                 type="email"
                 value={email || config.prefill}
                 onChange={e => setEmail(e.target.value)}
-                className="w-full h-10 bg-[#0d0d14] border border-[rgba(255,255,255,0.08)] rounded-lg px-3 text-sm text-[#f1f1f3] focus:border-[#4f6ef7] focus:outline-none focus:ring-1 focus:ring-[rgba(79,110,247,0.3)] transition-all"
+                className="w-full h-10 bg-[#DCE7E7] border border-[rgba(16,27,30,0.08)] rounded-lg px-3 text-sm text-[#101B1E] focus:border-[#2B6E78] focus:outline-none focus:ring-1 focus:ring-[rgba(43,110,120,0.3)] transition-all"
               />
             </div>
             <div>
-              <label className="text-[10px] font-medium text-[#9494a0] uppercase tracking-wider block mb-1.5">Password</label>
+              <label className="text-[10px] font-medium text-[#4A6064] uppercase tracking-wider block mb-1.5">Password</label>
               <input
                 type="password"
                 value={password || "••••••••••••"}
                 onChange={e => setPassword(e.target.value)}
-                className="w-full h-10 bg-[#0d0d14] border border-[rgba(255,255,255,0.08)] rounded-lg px-3 text-sm text-[#f1f1f3] focus:border-[#4f6ef7] focus:outline-none focus:ring-1 focus:ring-[rgba(79,110,247,0.3)] transition-all"
+                className="w-full h-10 bg-[#DCE7E7] border border-[rgba(16,27,30,0.08)] rounded-lg px-3 text-sm text-[#101B1E] focus:border-[#2B6E78] focus:outline-none focus:ring-1 focus:ring-[rgba(43,110,120,0.3)] transition-all"
               />
             </div>
           </div>
@@ -72,7 +72,7 @@ function LoginScreen({ role, onLogin, onBack }: { role: "customer" | "employee" 
           <button
             onClick={handleLogin}
             disabled={loading}
-            className="w-full h-10 bg-[#4f6ef7] text-white text-sm font-medium rounded-lg hover:bg-[#3d5ce8] transition-colors flex items-center justify-center gap-2 disabled:opacity-70"
+            className="w-full h-10 bg-[#2B6E78] text-white text-sm font-medium rounded-lg hover:bg-[#235761] transition-colors flex items-center justify-center gap-2 disabled:opacity-70"
           >
             {loading ? (
               <>
@@ -86,7 +86,7 @@ function LoginScreen({ role, onLogin, onBack }: { role: "customer" | "employee" 
           </button>
 
           <div className="mt-4 text-center">
-            <span className="text-[11px] text-[#5a5a66]">Demo: password pre-filled · click Sign In to continue</span>
+            <span className="text-[11px] text-[#7C9096]">Demo: password pre-filled · click Sign In to continue</span>
           </div>
         </div>
       </div>
@@ -97,18 +97,18 @@ function LoginScreen({ role, onLogin, onBack }: { role: "customer" | "employee" 
 // ── Portal Selector ────────────────────────────────────────────────────────
 function PortalSelector({ onSelect, onBack }: { onSelect: (role: "customer" | "employee" | "admin") => void; onBack: () => void }) {
   return (
-    <div className="min-h-screen bg-[#09090c] flex items-center justify-center p-6 grid-pattern">
-      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(79,110,247,0.05) 0%, transparent 60%)" }} />
+    <div className="min-h-screen bg-[#C7D3D4] flex items-center justify-center p-6 grid-pattern">
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(43,110,120,0.05) 0%, transparent 60%)" }} />
       <div className="relative w-full max-w-lg animate-fade-in">
-        <button onClick={onBack} className="flex items-center gap-1.5 text-xs text-[#5a5a66] hover:text-[#9494a0] mb-8 transition-colors">
+        <button onClick={onBack} className="flex items-center gap-1.5 text-xs text-[#7C9096] hover:text-[#4A6064] mb-8 transition-colors">
           ← Back to website
         </button>
         <div className="text-center mb-8">
-          <div className="size-12 rounded-xl bg-[#4f6ef7] flex items-center justify-center mx-auto mb-4">
+          <div className="size-12 rounded-xl bg-[#2B6E78] flex items-center justify-center mx-auto mb-4">
             <span className="text-white font-bold font-mono text-lg">A</span>
           </div>
-          <h1 className="text-2xl font-semibold text-[#f1f1f3] mb-2">Select Your Portal</h1>
-          <p className="text-sm text-[#5a5a66]">Choose the experience you want to explore</p>
+          <h1 className="text-2xl font-semibold text-[#101B1E] mb-2">Select Your Portal</h1>
+          <p className="text-sm text-[#7C9096]">Choose the experience you want to explore</p>
         </div>
         <div className="space-y-3">
           {[
@@ -119,14 +119,14 @@ function PortalSelector({ onSelect, onBack }: { onSelect: (role: "customer" | "e
             <button
               key={p.role}
               onClick={() => onSelect(p.role)}
-              className="w-full flex items-center gap-4 p-5 bg-[#111118] border border-[rgba(255,255,255,0.07)] rounded-xl hover:border-[rgba(79,110,247,0.35)] hover:bg-[rgba(79,110,247,0.03)] transition-all text-left group"
+              className="w-full flex items-center gap-4 p-5 bg-[#FFFFFF] border border-[rgba(16,27,30,0.07)] rounded-xl hover:border-[rgba(43,110,120,0.35)] hover:bg-[rgba(43,110,120,0.03)] transition-all text-left group"
             >
-              <div className="text-2xl text-[#5a5a66] group-hover:text-[#4f6ef7] transition-colors">{p.icon}</div>
+              <div className="text-2xl text-[#7C9096] group-hover:text-[#2B6E78] transition-colors">{p.icon}</div>
               <div className="flex-1">
-                <div className="text-sm font-semibold text-[#f1f1f3] mb-0.5">{p.label}</div>
-                <div className="text-xs text-[#5a5a66]">{p.desc}</div>
+                <div className="text-sm font-semibold text-[#101B1E] mb-0.5">{p.label}</div>
+                <div className="text-xs text-[#7C9096]">{p.desc}</div>
               </div>
-              <span className="text-[#6b6b7a] group-hover:text-[#4f6ef7] transition-colors">→</span>
+              <span className="text-[#5E7378] group-hover:text-[#2B6E78] transition-colors">→</span>
             </button>
           ))}
         </div>

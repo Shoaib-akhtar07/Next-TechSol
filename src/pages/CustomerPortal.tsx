@@ -17,13 +17,13 @@ const NAV_ITEMS: NavItem[] = [
 
 function Sidebar({ active, onChange, onLogout }: { active: string; onChange: (id: string) => void; onLogout: () => void }) {
   return (
-    <aside className="w-56 flex-shrink-0 bg-[#0a0a10] border-r border-[rgba(255,255,255,0.07)] flex flex-col">
-      <div className="h-14 flex items-center px-4 border-b border-[rgba(255,255,255,0.07)]">
+    <aside className="w-56 flex-shrink-0 bg-[#C7D3D4] border-r border-[rgba(16,27,30,0.07)] flex flex-col">
+      <div className="h-14 flex items-center px-4 border-b border-[rgba(16,27,30,0.07)]">
         <div className="flex items-center gap-2">
-          <div className="size-6 rounded-md bg-[#4f6ef7] flex items-center justify-center">
-            <span className="text-white font-bold text-[10px] font-mono">A</span>
+          <div className="size-6 rounded-md bg-[#2B6E78] flex items-center justify-center">
+            <span className="text-white font-bold text-[10px] font-mono">N</span>
           </div>
-          <span className="text-sm font-semibold text-[#f1f1f3]">Arcane</span>
+          <span className="text-sm font-semibold text-[#101B1E]">Next TechSol</span>
         </div>
         <div className="ml-auto">
           <Badge variant="info" size="sm">Client</Badge>
@@ -34,22 +34,22 @@ function Sidebar({ active, onChange, onLogout }: { active: string; onChange: (id
           <button
             key={item.id}
             onClick={() => onChange(item.id)}
-            className={`w-full flex items-center gap-2.5 px-4 py-2 text-sm transition-all ${active === item.id ? "text-[#f1f1f3] bg-[rgba(79,110,247,0.1)] border-r-2 border-[#4f6ef7]" : "text-[#6b6b7a] hover:text-[#9494a0] hover:bg-[rgba(255,255,255,0.02)]"}`}
+            className={`w-full flex items-center gap-2.5 px-4 py-2 text-sm transition-all ${active === item.id ? "text-[#101B1E] bg-[rgba(43,110,120,0.1)] border-r-2 border-[#2B6E78]" : "text-[#5E7378] hover:text-[#4A6064] hover:bg-[rgba(16,27,30,0.02)]"}`}
           >
             <span className="text-base w-5 text-center">{item.icon}</span>
             <span className="flex-1 text-left">{item.label}</span>
             {item.badge && (
-              <span className="text-[10px] font-mono bg-[rgba(79,110,247,0.2)] text-[#4f6ef7] px-1.5 py-0.5 rounded-full">{item.badge}</span>
+              <span className="text-[10px] font-mono bg-[rgba(43,110,120,0.2)] text-[#2B6E78] px-1.5 py-0.5 rounded-full">{item.badge}</span>
             )}
           </button>
         ))}
       </div>
-      <div className="p-4 border-t border-[rgba(255,255,255,0.07)]">
+      <div className="p-4 border-t border-[rgba(16,27,30,0.07)]">
         <div className="flex items-center gap-2.5 mb-3">
           <Avatar name="James Mitchell" size="sm" />
           <div>
-            <div className="text-xs font-medium text-[#f1f1f3]">James Mitchell</div>
-            <div className="text-[10px] text-[#5a5a66]">Atlas Travel Group</div>
+            <div className="text-xs font-medium text-[#101B1E]">James Mitchell</div>
+            <div className="text-[10px] text-[#7C9096]">Atlas Travel Group</div>
           </div>
         </div>
         <Button variant="ghost" size="sm" className="w-full justify-start text-xs" onClick={onLogout}>← Sign out</Button>
@@ -61,16 +61,16 @@ function Sidebar({ active, onChange, onLogout }: { active: string; onChange: (id
 function TopBar({ title, subtitle, onSearch }: { title: string; subtitle?: string; onSearch?: (v: string) => void }) {
   const [q, setQ] = useState("");
   return (
-    <div className="h-14 flex items-center justify-between px-6 border-b border-[rgba(255,255,255,0.07)] flex-shrink-0">
+    <div className="h-14 flex items-center justify-between px-6 border-b border-[rgba(16,27,30,0.07)] flex-shrink-0">
       <div>
-        <div className="text-sm font-semibold text-[#f1f1f3]">{title}</div>
-        {subtitle && <div className="text-xs text-[#5a5a66]">{subtitle}</div>}
+        <div className="text-sm font-semibold text-[#101B1E]">{title}</div>
+        {subtitle && <div className="text-xs text-[#7C9096]">{subtitle}</div>}
       </div>
       <div className="flex items-center gap-3">
         {onSearch && <SearchBar value={q} onChange={v => { setQ(v); onSearch(v); }} placeholder="Search..." />}
-        <button className="relative w-8 h-8 flex items-center justify-center rounded-lg text-[#6b6b7a] hover:text-[#f1f1f3] hover:bg-[rgba(255,255,255,0.05)] transition-all">
+        <button className="relative w-8 h-8 flex items-center justify-center rounded-lg text-[#5E7378] hover:text-[#101B1E] hover:bg-[rgba(16,27,30,0.05)] transition-all">
           <span>◆</span>
-          <span className="absolute top-1.5 right-1.5 size-1.5 rounded-full bg-[#4f6ef7]" />
+          <span className="absolute top-1.5 right-1.5 size-1.5 rounded-full bg-[#2B6E78]" />
         </button>
         <Avatar name="James Mitchell" size="sm" />
       </div>
@@ -84,8 +84,8 @@ function Dashboard() {
     <div className="flex-1 overflow-y-auto p-6 animate-fade-in">
       <div className="max-w-6xl">
         <div className="mb-6">
-          <h2 className="text-xl font-semibold text-[#f1f1f3]">Good morning, James.</h2>
-          <p className="text-sm text-[#5a5a66] mt-0.5">Here's what needs your attention today.</p>
+          <h2 className="text-xl font-semibold text-[#101B1E]">Good morning, James.</h2>
+          <p className="text-sm text-[#7C9096] mt-0.5">Here's what needs your attention today.</p>
         </div>
         {/* KPIs */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
@@ -100,7 +100,7 @@ function Dashboard() {
           <div className="lg:col-span-2">
             <Card>
               <div className="flex items-center justify-between mb-4">
-                <div className="text-sm font-semibold text-[#f1f1f3]">Active Projects</div>
+                <div className="text-sm font-semibold text-[#101B1E]">Active Projects</div>
                 <Button variant="ghost" size="sm">View all →</Button>
               </div>
               <div className="space-y-4">
@@ -109,13 +109,13 @@ function Dashboard() {
                   { name: "Mobile App v2.0", phase: "Design", progress: 30, status: "on-track", due: "Apr 28, 2026" },
                   { name: "API Integration Suite", phase: "Testing", progress: 85, status: "review", due: "Feb 28, 2026" },
                 ].map(p => (
-                  <div key={p.name} className="p-4 bg-[#0d0d14] rounded-xl border border-[rgba(255,255,255,0.05)]">
+                  <div key={p.name} className="p-4 bg-[#DCE7E7] rounded-xl border border-[rgba(16,27,30,0.05)]">
                     <div className="flex items-center justify-between mb-2">
-                      <div className="text-sm font-medium text-[#f1f1f3]">{p.name}</div>
+                      <div className="text-sm font-medium text-[#101B1E]">{p.name}</div>
                       <Badge variant={p.status === "on-track" ? "success" : "warning"} size="sm" dot>{p.phase}</Badge>
                     </div>
-                    <ProgressBar value={p.progress} showPercent color={p.progress > 80 ? "#4ade80" : "#4f6ef7"} />
-                    <div className="text-[11px] text-[#5a5a66] mt-2">Due {p.due}</div>
+                    <ProgressBar value={p.progress} showPercent color={p.progress > 80 ? "#16A34A" : "#2B6E78"} />
+                    <div className="text-[11px] text-[#7C9096] mt-2">Due {p.due}</div>
                   </div>
                 ))}
               </div>
@@ -125,16 +125,16 @@ function Dashboard() {
           {/* Right column */}
           <div className="space-y-5">
             <Card>
-              <div className="text-sm font-semibold text-[#f1f1f3] mb-3">Pending Approvals</div>
+              <div className="text-sm font-semibold text-[#101B1E] mb-3">Pending Approvals</div>
               {[
                 { title: "Homepage Design v3", type: "Design Review", urgent: true },
                 { title: "Payment Gateway Spec", type: "Technical Review", urgent: false },
               ].map(a => (
-                <div key={a.title} className="flex items-start gap-3 py-3 border-b border-[rgba(255,255,255,0.05)] last:border-0">
-                  <div className={`size-1.5 rounded-full mt-1.5 flex-shrink-0 ${a.urgent ? "bg-[#facc15]" : "bg-[#5a5a66]"}`} />
+                <div key={a.title} className="flex items-start gap-3 py-3 border-b border-[rgba(16,27,30,0.05)] last:border-0">
+                  <div className={`size-1.5 rounded-full mt-1.5 flex-shrink-0 ${a.urgent ? "bg-[#CA8A04]" : "bg-[#7C9096]"}`} />
                   <div className="flex-1 min-w-0">
-                    <div className="text-xs font-medium text-[#c4c4cc] truncate">{a.title}</div>
-                    <div className="text-[11px] text-[#5a5a66]">{a.type}</div>
+                    <div className="text-xs font-medium text-[#33474B] truncate">{a.title}</div>
+                    <div className="text-[11px] text-[#7C9096]">{a.type}</div>
                   </div>
                   <Button size="sm" variant="outline" className="text-[10px] h-6 px-2 flex-shrink-0">Review</Button>
                 </div>
@@ -142,37 +142,37 @@ function Dashboard() {
             </Card>
 
             <Card>
-              <div className="text-sm font-semibold text-[#f1f1f3] mb-3">Recent Messages</div>
+              <div className="text-sm font-semibold text-[#101B1E] mb-3">Recent Messages</div>
               {[
                 { from: "Sarah Chen", msg: "Design review scheduled for Friday 2pm", time: "2h ago" },
                 { from: "Project Bot", msg: "Sprint 7 completed — 23/24 tasks done", time: "5h ago" },
               ].map(m => (
-                <div key={m.from} className="flex gap-3 py-3 border-b border-[rgba(255,255,255,0.05)] last:border-0">
+                <div key={m.from} className="flex gap-3 py-3 border-b border-[rgba(16,27,30,0.05)] last:border-0">
                   <Avatar name={m.from} size="sm" />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between mb-0.5">
-                      <span className="text-[11px] font-medium text-[#c4c4cc]">{m.from}</span>
-                      <span className="text-[10px] text-[#5a5a66]">{m.time}</span>
+                      <span className="text-[11px] font-medium text-[#33474B]">{m.from}</span>
+                      <span className="text-[10px] text-[#7C9096]">{m.time}</span>
                     </div>
-                    <div className="text-[11px] text-[#5a5a66] truncate">{m.msg}</div>
+                    <div className="text-[11px] text-[#7C9096] truncate">{m.msg}</div>
                   </div>
                 </div>
               ))}
             </Card>
 
             <Card>
-              <div className="text-sm font-semibold text-[#f1f1f3] mb-3">Upcoming Milestones</div>
+              <div className="text-sm font-semibold text-[#101B1E] mb-3">Upcoming Milestones</div>
               {[
                 { title: "API v2 Go-Live", date: "Feb 28", status: "danger" as const },
                 { title: "Design Handoff", date: "Mar 5", status: "warning" as const },
                 { title: "Beta Launch", date: "Mar 20", status: "success" as const },
               ].map(m => (
-                <div key={m.title} className="flex items-center justify-between py-2 border-b border-[rgba(255,255,255,0.05)] last:border-0">
+                <div key={m.title} className="flex items-center justify-between py-2 border-b border-[rgba(16,27,30,0.05)] last:border-0">
                   <div className="flex items-center gap-2">
-                    <div className={`size-1.5 rounded-full ${m.status === "danger" ? "bg-[#f87171]" : m.status === "warning" ? "bg-[#facc15]" : "bg-[#4ade80]"}`} />
-                    <span className="text-xs text-[#c4c4cc]">{m.title}</span>
+                    <div className={`size-1.5 rounded-full ${m.status === "danger" ? "bg-[#DC2626]" : m.status === "warning" ? "bg-[#CA8A04]" : "bg-[#16A34A]"}`} />
+                    <span className="text-xs text-[#33474B]">{m.title}</span>
                   </div>
-                  <span className="text-[11px] font-mono text-[#5a5a66]">{m.date}</span>
+                  <span className="text-[11px] font-mono text-[#7C9096]">{m.date}</span>
                 </div>
               ))}
             </Card>
@@ -190,7 +190,7 @@ function Projects() {
     <div className="flex-1 overflow-y-auto p-6 animate-fade-in">
       <div className="max-w-6xl">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-[#f1f1f3]">Projects</h2>
+          <h2 className="text-xl font-semibold text-[#101B1E]">Projects</h2>
           <Tabs tabs={[{id:"active",label:"Active",count:3},{id:"completed",label:"Completed",count:8},{id:"all",label:"All"}]} active={activeTab} onChange={setActiveTab} />
         </div>
         <div className="grid lg:grid-cols-2 gap-5">
@@ -199,11 +199,11 @@ function Projects() {
             { name: "Mobile App v2.0", phase: "Design", progress: 30, health: "On Track", client: "Atlas Travel Group", team: ["Priya Nair", "Sarah Chen"], start: "Jan 2026", end: "Apr 2026", budget: "$38,000", spent: 28 },
             { name: "API Integration Suite", phase: "Testing", progress: 85, health: "Needs Review", client: "Atlas Travel Group", team: ["Marcus Webb", "Tom Okonkwo"], start: "Dec 2025", end: "Feb 2026", budget: "$22,000", spent: 82 },
           ].map(p => (
-            <div key={p.name} className="bg-[#111118] border border-[rgba(255,255,255,0.07)] rounded-xl p-5 hover:border-[rgba(79,110,247,0.25)] transition-all">
+            <div key={p.name} className="bg-[#FFFFFF] border border-[rgba(16,27,30,0.07)] rounded-xl p-5 hover:border-[rgba(43,110,120,0.25)] transition-all">
               <div className="flex items-start justify-between mb-3">
                 <div>
-                  <div className="text-sm font-semibold text-[#f1f1f3] mb-1">{p.name}</div>
-                  <div className="text-[11px] text-[#5a5a66]">{p.client}</div>
+                  <div className="text-sm font-semibold text-[#101B1E] mb-1">{p.name}</div>
+                  <div className="text-[11px] text-[#7C9096]">{p.client}</div>
                 </div>
                 <Badge variant={p.health === "On Track" ? "success" : "warning"} dot>{p.health}</Badge>
               </div>
@@ -211,17 +211,17 @@ function Projects() {
                 <ProgressBar value={p.progress} showPercent label="Overall Progress" />
               </div>
               <div className="grid grid-cols-3 gap-3 mb-4 text-center">
-                <div className="bg-[#0d0d14] rounded-lg p-2">
-                  <div className="text-xs font-mono text-[#f1f1f3]">{p.phase}</div>
-                  <div className="text-[10px] text-[#5a5a66]">Current Phase</div>
+                <div className="bg-[#DCE7E7] rounded-lg p-2">
+                  <div className="text-xs font-mono text-[#101B1E]">{p.phase}</div>
+                  <div className="text-[10px] text-[#7C9096]">Current Phase</div>
                 </div>
-                <div className="bg-[#0d0d14] rounded-lg p-2">
-                  <div className="text-xs font-mono text-[#f1f1f3]">{p.budget}</div>
-                  <div className="text-[10px] text-[#5a5a66]">Budget</div>
+                <div className="bg-[#DCE7E7] rounded-lg p-2">
+                  <div className="text-xs font-mono text-[#101B1E]">{p.budget}</div>
+                  <div className="text-[10px] text-[#7C9096]">Budget</div>
                 </div>
-                <div className="bg-[#0d0d14] rounded-lg p-2">
-                  <div className="text-xs font-mono text-[#f1f1f3]">{p.end}</div>
-                  <div className="text-[10px] text-[#5a5a66]">Due Date</div>
+                <div className="bg-[#DCE7E7] rounded-lg p-2">
+                  <div className="text-xs font-mono text-[#101B1E]">{p.end}</div>
+                  <div className="text-[10px] text-[#7C9096]">Due Date</div>
                 </div>
               </div>
               <div className="flex items-center justify-between">
@@ -256,17 +256,17 @@ function Tasks() {
   return (
     <div className="flex-1 overflow-y-auto p-6 animate-fade-in">
       <div className="max-w-6xl">
-        <h2 className="text-xl font-semibold text-[#f1f1f3] mb-6">Tasks</h2>
+        <h2 className="text-xl font-semibold text-[#101B1E] mb-6">Tasks</h2>
         <Card className="!p-0 overflow-hidden">
           <Table
             columns={[
-              { key: "id", label: "ID", width: "80px", render: r => <span className="font-mono text-[10px] text-[#5a5a66]">{String(r.id)}</span> },
-              { key: "title", label: "Task", render: r => <span className="text-[#f1f1f3] font-medium">{String(r.title)}</span> },
-              { key: "project", label: "Project", render: r => <span className="text-xs text-[#6b6b7a]">{String(r.project)}</span> },
+              { key: "id", label: "ID", width: "80px", render: r => <span className="font-mono text-[10px] text-[#7C9096]">{String(r.id)}</span> },
+              { key: "title", label: "Task", render: r => <span className="text-[#101B1E] font-medium">{String(r.title)}</span> },
+              { key: "project", label: "Project", render: r => <span className="text-xs text-[#5E7378]">{String(r.project)}</span> },
               { key: "status", label: "Status", render: r => <Badge variant={statusColor[String(r.status)] || "neutral"} dot>{String(r.status)}</Badge> },
               { key: "priority", label: "Priority", render: r => <Badge variant={priorityColor[String(r.priority)] || "neutral"}>{String(r.priority)}</Badge> },
-              { key: "due", label: "Due", render: r => <span className="font-mono text-[11px] text-[#5a5a66]">{String(r.due)}</span> },
-              { key: "assignee", label: "Assigned", render: r => <div className="flex items-center gap-1.5"><Avatar name={String(r.assignee)} size="xs" /><span className="text-xs text-[#6b6b7a]">{String(r.assignee)}</span></div> },
+              { key: "due", label: "Due", render: r => <span className="font-mono text-[11px] text-[#7C9096]">{String(r.due)}</span> },
+              { key: "assignee", label: "Assigned", render: r => <div className="flex items-center gap-1.5"><Avatar name={String(r.assignee)} size="xs" /><span className="text-xs text-[#5E7378]">{String(r.assignee)}</span></div> },
             ]}
             data={tasks as Record<string, unknown>[]}
           />
@@ -290,7 +290,7 @@ function Documents() {
     <div className="flex-1 overflow-y-auto p-6 animate-fade-in">
       <div className="max-w-6xl">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-[#f1f1f3]">Documents</h2>
+          <h2 className="text-xl font-semibold text-[#101B1E]">Documents</h2>
           <div className="flex gap-3">
             <SearchBar value={search} onChange={setSearch} placeholder="Search documents..." />
             <Button size="sm">Upload</Button>
@@ -298,7 +298,7 @@ function Documents() {
         </div>
         <div className="flex gap-2 mb-5">
           {["All", "Contracts", "Designs", "Requirements", "Invoices", "Deliverables"].map(cat => (
-            <button key={cat} className="text-xs px-3 py-1.5 rounded-lg border border-[rgba(255,255,255,0.07)] text-[#6b6b7a] hover:text-[#f1f1f3] hover:border-[rgba(79,110,247,0.3)] transition-all">
+            <button key={cat} className="text-xs px-3 py-1.5 rounded-lg border border-[rgba(16,27,30,0.07)] text-[#5E7378] hover:text-[#101B1E] hover:border-[rgba(43,110,120,0.3)] transition-all">
               {cat}
             </button>
           ))}
@@ -306,10 +306,10 @@ function Documents() {
         <Card className="!p-0 overflow-hidden">
           <Table
             columns={[
-              { key: "name", label: "File", render: r => <div className="flex items-center gap-2"><span className="text-base">📄</span><span className="text-[#f1f1f3] text-xs font-medium">{String(r.name)}</span></div> },
+              { key: "name", label: "File", render: r => <div className="flex items-center gap-2"><span className="text-base">📄</span><span className="text-[#101B1E] text-xs font-medium">{String(r.name)}</span></div> },
               { key: "category", label: "Category", render: r => <Badge variant="neutral" size="sm">{String(r.category)}</Badge> },
-              { key: "size", label: "Size", render: r => <span className="font-mono text-[11px] text-[#5a5a66]">{String(r.size)}</span> },
-              { key: "date", label: "Date", render: r => <span className="text-xs text-[#6b6b7a]">{String(r.date)}</span> },
+              { key: "size", label: "Size", render: r => <span className="font-mono text-[11px] text-[#7C9096]">{String(r.size)}</span> },
+              { key: "date", label: "Date", render: r => <span className="text-xs text-[#5E7378]">{String(r.date)}</span> },
               { key: "status", label: "Status", render: r => <Badge variant={String(r.status) === "Signed" || String(r.status) === "Paid" || String(r.status) === "Approved" ? "success" : String(r.status) === "Latest" ? "info" : "warning"} size="sm">{String(r.status)}</Badge> },
               { key: "actions", label: "", render: () => <div className="flex gap-2"><Button size="sm" variant="ghost">Preview</Button><Button size="sm" variant="secondary">Download</Button></div> },
             ]}
@@ -333,7 +333,7 @@ function Invoices() {
     <div className="flex-1 overflow-y-auto p-6 animate-fade-in">
       <div className="max-w-4xl">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-[#f1f1f3]">Invoices</h2>
+          <h2 className="text-xl font-semibold text-[#101B1E]">Invoices</h2>
         </div>
         <div className="grid grid-cols-3 gap-4 mb-6">
           <KPICard label="Outstanding" value="$18,000" icon="◈" />
@@ -343,11 +343,11 @@ function Invoices() {
         <Card className="!p-0 overflow-hidden">
           <Table
             columns={[
-              { key: "id", label: "Invoice", render: r => <span className="font-mono text-[11px] text-[#4f6ef7]">{String(r.id)}</span> },
-              { key: "desc", label: "Description", render: r => <span className="text-xs text-[#c4c4cc]">{String(r.desc)}</span> },
-              { key: "amount", label: "Amount", render: r => <span className="font-semibold text-sm text-[#f1f1f3]">{String(r.amount)}</span> },
-              { key: "date", label: "Issued", render: r => <span className="text-xs text-[#6b6b7a]">{String(r.date)}</span> },
-              { key: "due", label: "Due", render: r => <span className="text-xs text-[#6b6b7a]">{String(r.due)}</span> },
+              { key: "id", label: "Invoice", render: r => <span className="font-mono text-[11px] text-[#2B6E78]">{String(r.id)}</span> },
+              { key: "desc", label: "Description", render: r => <span className="text-xs text-[#33474B]">{String(r.desc)}</span> },
+              { key: "amount", label: "Amount", render: r => <span className="font-semibold text-sm text-[#101B1E]">{String(r.amount)}</span> },
+              { key: "date", label: "Issued", render: r => <span className="text-xs text-[#5E7378]">{String(r.date)}</span> },
+              { key: "due", label: "Due", render: r => <span className="text-xs text-[#5E7378]">{String(r.due)}</span> },
               { key: "status", label: "Status", render: r => <Badge variant={String(r.status) === "Paid" ? "success" : "warning"} dot>{String(r.status)}</Badge> },
               { key: "actions", label: "", render: r => <div className="flex gap-1">{String(r.status) === "Unpaid" && <Button size="sm" variant="primary">Pay Now</Button>}<Button size="sm" variant="ghost">View</Button></div> },
             ]}
@@ -372,21 +372,21 @@ function Notifications() {
     <div className="flex-1 overflow-y-auto p-6 animate-fade-in">
       <div className="max-w-2xl">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-[#f1f1f3]">Notifications</h2>
+          <h2 className="text-xl font-semibold text-[#101B1E]">Notifications</h2>
           <Button variant="ghost" size="sm">Mark all as read</Button>
         </div>
         <div className="space-y-2">
           {notifs.map((n, i) => (
-            <div key={i} className={`flex gap-4 p-4 rounded-xl border transition-all ${n.unread ? "bg-[rgba(79,110,247,0.05)] border-[rgba(79,110,247,0.15)]" : "bg-[#111118] border-[rgba(255,255,255,0.06)]"}`}>
-              <div className={`text-lg ${n.unread ? "text-[#4f6ef7]" : "text-[#5a5a66]"}`}>{n.icon}</div>
+            <div key={i} className={`flex gap-4 p-4 rounded-xl border transition-all ${n.unread ? "bg-[rgba(43,110,120,0.05)] border-[rgba(43,110,120,0.15)]" : "bg-[#FFFFFF] border-[rgba(16,27,30,0.06)]"}`}>
+              <div className={`text-lg ${n.unread ? "text-[#2B6E78]" : "text-[#7C9096]"}`}>{n.icon}</div>
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-0.5">
-                  <span className="text-sm font-medium text-[#f1f1f3]">{n.title}</span>
-                  {n.unread && <span className="size-1.5 rounded-full bg-[#4f6ef7]" />}
+                  <span className="text-sm font-medium text-[#101B1E]">{n.title}</span>
+                  {n.unread && <span className="size-1.5 rounded-full bg-[#2B6E78]" />}
                 </div>
-                <div className="text-xs text-[#6b6b7a]">{n.desc}</div>
+                <div className="text-xs text-[#5E7378]">{n.desc}</div>
               </div>
-              <div className="text-[11px] text-[#5a5a66] whitespace-nowrap">{n.time}</div>
+              <div className="text-[11px] text-[#7C9096] whitespace-nowrap">{n.time}</div>
             </div>
           ))}
         </div>
@@ -418,7 +418,7 @@ export default function CustomerPortal({ onLogout }: { onLogout: () => void }) {
     }
   };
   return (
-    <div className="h-screen flex bg-[#09090c] overflow-hidden">
+    <div className="h-screen flex bg-[#C7D3D4] overflow-hidden">
       <Sidebar active={activeView} onChange={setActiveView} onLogout={onLogout} />
       <div className="flex-1 flex flex-col min-w-0">
         <TopBar title={titles[activeView]} subtitle="Atlas Travel Group" />
